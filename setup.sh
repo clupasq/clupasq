@@ -8,13 +8,13 @@ function installVundleForVimPlugins {
 }
 
 function createDotfileLinks {
-  source_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+  source_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/dotfiles"
 
-  for f in $(git ls-files | grep ^\\.)
+  for f in $(ls -A $source_dir)
   do
-    dest="$HOME/$f"
+    dest="$HOME/$(basename $f)"
 
-    if [ ! -f $dest ]; then
+    if [ ! -f $dest ] && [ ! -h $dest ]; then
       ln -s "$source_dir/$f" $dest 
       echo "$f - linked OK"
     else
