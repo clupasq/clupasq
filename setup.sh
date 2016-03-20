@@ -1,9 +1,11 @@
 #!/bin/bash
 
 function installVundleForVimPlugins {
-  vundle_dir=~/.vim/bundle/Vundle.vim
+  vundle_dir="$HOME/.vim/bundle/Vundle.vim"
   if [ ! -d "$vundle_dir" ]; then
-    git clone https://github.com/VundleVim/Vundle.vim.git 
+    git clone https://github.com/VundleVim/Vundle.vim.git $vundle_dir 
+  else
+    echo "Vundle appears to be already installed."
   fi
 }
 
