@@ -1,6 +1,6 @@
 " Example Vim configuration.
 " Copy or symlink to ~/.vimrc or ~/_vimrc.
-
+"
 set nocompatible                  " Must come first because it changes other options.
 
 set t_Co=256                      " 256 colors...
@@ -42,6 +42,8 @@ set nobackup                      " Don't make a backup before overwriting a fil
 set nowritebackup                 " And again.
 set directory=$HOME/.vim/tmp//,.  " Keep swap files in one location
 
+set mouse=a                       " Use the mouse if available for scaling wins, activating tabs.
+
 " UNCOMMENT TO USE
 set tabstop=2                    " Global tab width.
 set shiftwidth=2                 " And again, related.
@@ -65,6 +67,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'noah/vim256-color'
+
+Plugin 'kien/ctrlp.vim'
 
 "  " The following are examples of different formats supported.
 "  " Keep Plugin commands between vundle#begin/end.
