@@ -105,6 +105,7 @@ filetype plugin indent on    " required
 " ========================================
 
 
-
 colorscheme apprentice
+
+let mapleader = ","
 
