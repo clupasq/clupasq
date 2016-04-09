@@ -70,6 +70,8 @@ Plugin 'noah/vim256-color'
 
 Plugin 'kien/ctrlp.vim'
 
+Plugin 'ngmy/vim-rubocop'
+
 "  " The following are examples of different formats supported.
 "  " Keep Plugin commands between vundle#begin/end.
 "  " plugin on GitHub repo
