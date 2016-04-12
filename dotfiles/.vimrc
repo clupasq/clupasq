@@ -106,8 +106,10 @@ filetype plugin indent on    " required
 
 " ========================================
 
-
 colorscheme apprentice
 
 let mapleader = ","
 
+if filereadable(".vimrc.local")
+  source .vimrc.local
+endif
