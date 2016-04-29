@@ -66,7 +66,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'noah/vim256-color'
+Plugin 'nanotech/jellybeans.vim'
 
 Plugin 'kien/ctrlp.vim'
 
@@ -108,9 +108,9 @@ filetype plugin indent on    " required
 
 " ========================================
 
-colorscheme apprentice
+colorscheme jellybeans
 
-let mapleader = ","
+let mapleader = " "
 
 if filereadable(".vimrc.local")
   source .vimrc.local
