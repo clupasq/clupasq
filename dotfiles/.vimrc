@@ -26,6 +26,7 @@ set ignorecase                    " Case-insensitive searching.
 set smartcase                     " But case-sensitive if expression contains a capital letter.
 
 set number                        " Show line numbers.
+set relativenumber
 set ruler                         " Show cursor position.
 
 set incsearch                     " Highlight matches as you type.
