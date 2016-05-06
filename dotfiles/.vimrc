@@ -45,6 +45,8 @@ set directory=$HOME/.vim/tmp//,.  " Keep swap files in one location
 
 set mouse=a                       " Use the mouse if available for scaling wins, activating tabs.
 
+set list lcs=trail:·,tab:»·
+
 " UNCOMMENT TO USE
 set tabstop=2                    " Global tab width.
 set shiftwidth=2                 " And again, related.
