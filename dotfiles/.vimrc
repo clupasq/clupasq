@@ -75,6 +75,8 @@ Plugin 'henrik/vim-indexed-search'
 Plugin 'mattn/emmet-vim'
 Plugin 'bogado/file-line'
 Plugin 'bronson/vim-trailing-whitespace'
+let g:VtrUseVtrMaps = 1
+Plugin 'christoomey/vim-tmux-runner'
 
 "  " The following are examples of different formats supported.
 "  " Keep Plugin commands between vundle#begin/end.
