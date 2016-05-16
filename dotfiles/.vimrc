@@ -80,6 +80,20 @@ Plugin 'bronson/vim-trailing-whitespace'
 let g:VtrUseVtrMaps = 1
 Plugin 'christoomey/vim-tmux-runner'
 
+
+"""" ULTISNIPS """"""""""""""""""""
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-k>"
+let g:UltiSnipsJumpBackwardTrigger="<c-j>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+"""""""""""""""""""""""""""""""""""
+
 "  " The following are examples of different formats supported.
 "  " Keep Plugin commands between vundle#begin/end.
 "  " plugin on GitHub repo
