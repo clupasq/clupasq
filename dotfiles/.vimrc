@@ -79,6 +79,7 @@ Plugin 'bogado/file-line'
 Plugin 'bronson/vim-trailing-whitespace'
 let g:VtrUseVtrMaps = 1
 Plugin 'christoomey/vim-tmux-runner'
+Plugin 'tpope/vim-surround'
 
 
 """" ULTISNIPS """"""""""""""""""""
