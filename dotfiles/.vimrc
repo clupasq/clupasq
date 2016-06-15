@@ -80,7 +80,10 @@ Plugin 'bronson/vim-trailing-whitespace'
 let g:VtrUseVtrMaps = 1
 Plugin 'christoomey/vim-tmux-runner'
 Plugin 'tpope/vim-surround'
-"Plugin 'wincent/loupe'
+" I use this instead of the original (wincent/loupe)
+" because of https://github.com/wincent/loupe/issues/6
+" todo: try using the original one after upgrading to Ubuntu 16
+Plugin 'wolfascu/loupe'
 
 
 """" ULTISNIPS """"""""""""""""""""
