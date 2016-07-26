@@ -5,10 +5,7 @@ set nocompatible                  " Must come first because it changes other opt
 
 set t_Co=256                      " 256 colors...
 
-silent! call pathogen#runtime_append_all_bundles()
-
 syntax enable                     " Turn on syntax highlighting.
-filetype plugin indent on         " Turn on file type detection.
 
 runtime macros/matchit.vim        " Load the matchit plugin.
 
