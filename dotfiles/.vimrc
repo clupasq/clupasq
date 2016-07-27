@@ -1,6 +1,3 @@
-" Example Vim configuration.
-" Copy or symlink to ~/.vimrc or ~/_vimrc.
-"
 set nocompatible                  " Must come first because it changes other options.
 
 set t_Co=256                      " 256 colors...
@@ -109,7 +106,7 @@ let g:UltiSnipsEditSplit="vertical"
 "  " Install L9 and avoid a Naming conflict if you've already installed a
 "  " different version somewhere else.
 "  Plugin 'ascenator/L9', {'name': 'newL9'}
-"  
+"
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -134,3 +131,63 @@ let mapleader = " "
 if filereadable(".vimrc.local")
   source .vimrc.local
 endif
+
+" ========
+" MAPPINGS
+" ========
+
+" VISUAL
+" ========
+" use ctrl+direction to switch windows
+xnoremap <C-h> <C-w>h
+xnoremap <C-j> <C-w>j
+xnoremap <C-k> <C-w>k
+xnoremap <C-l> <C-w>l
+
+" COMMAND
+" ========
+" commandline style go to beginning/end
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+
+" NORMAL
+" ========
+" avoid pressing Q to go to Ex mode
+nnoremap Q q
+
+" make Y behave like C, D
+noremap Y y$
+
+" Ctrl+dir navigation between windows
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" unset K (manual lookup)
+nnoremap K <nop>
+
+" Repurpose cursor keys for use with the quickfix window
+nnoremap <silent> <Up> :cprevious<CR>
+nnoremap <silent> <Down> :cnext<CR>
+nnoremap <silent> <Left> :cpfile<CR>
+nnoremap <silent> <Right> :cnfile<CR>
+
+" Use - to open the folder the current file is in
+"nnoremap <silent> - :silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
+
+" Store relative line number jumps in the jumplist if they exceed a threshold.
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
+nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
+
+" LEADER
+" ========
+" use leader leader to switch between file and alt file
+nnoremap <Leader><Leader> <C-^>
+
+" <Leader>p -- Show the path of the current file (mnemonic: path; useful when
+" you have a lot of splits and the status line gets truncated).
+nnoremap <Leader>p :echo expand('%')<CR>
+
+" <LocalLeader>e -- Edit file, starting in same directory as current file.
+nnoremap <Leader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
