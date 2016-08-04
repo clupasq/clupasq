@@ -64,6 +64,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_custom_ignore = 'node_modules\|git'
 Plugin 'ngmy/vim-rubocop'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'henrik/vim-indexed-search'
