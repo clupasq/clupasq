@@ -63,7 +63,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'nanotech/jellybeans.vim'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ngmy/vim-rubocop'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'henrik/vim-indexed-search'
