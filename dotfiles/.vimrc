@@ -41,7 +41,9 @@ set mouse=a                       " Use the mouse if available for scaling wins,
 
 set list lcs=trail:·,tab:»·
 
-" UNCOMMENT TO USE
+set splitright                   " vertical splits open new window to the right
+set splitbelow                   " horizontal splits open new window to the bottom
+
 set tabstop=2                    " Global tab width.
 set shiftwidth=2                 " And again, related.
 set expandtab                    " Use spaces instead of tabs
