@@ -35,6 +35,8 @@ set visualbell                                             " No beeping.
 
 set fillchars=vert:┃                                       " Nice vertical separators
 
+set foldmethod=indent
+set foldlevelstart=20                                      " No indentation when opening files
 
 if exists('$SUDO_USER')
   set nobackup                                             " don't create root-owned files
