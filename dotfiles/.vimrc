@@ -1,72 +1,72 @@
-set nocompatible                  " Must come first because it changes other options.
+set nocompatible                                           " Must come first because it changes other options.
 
-set t_Co=256                      " 256 colors...
+set t_Co=256                                               " 256 colors...
 
-syntax enable                     " Turn on syntax highlighting.
+syntax enable                                              " Turn on syntax highlighting.
 
-runtime macros/matchit.vim        " Load the matchit plugin.
+runtime macros/matchit.vim                                 " Load the matchit plugin.
 
-set showcmd                       " Display incomplete commands.
-set showmode                      " Display the mode you're in.
+set showcmd                                                " Display incomplete commands.
+set showmode                                               " Display the mode you're in.
 
-set backspace=indent,eol,start    " Intuitive backspacing.
+set backspace=indent,eol,start                             " Intuitive backspacing.
 
-set hidden                        " Handle multiple buffers better.
+set hidden                                                 " Handle multiple buffers better.
 
-set wildmenu                      " Enhanced command line completion.
-set wildmode=list:longest         " Complete files like a shell.
+set wildmenu                                               " Enhanced command line completion.
+set wildmode=list:longest                                  " Complete files like a shell.
 
-set ignorecase                    " Case-insensitive searching.
-set smartcase                     " But case-sensitive if expression contains a capital letter.
+set ignorecase                                             " Case-insensitive searching.
+set smartcase                                              " But case-sensitive if expression contains a capital letter.
 
-set number                        " Show line numbers.
+set number                                                 " Show line numbers.
 set relativenumber
-set ruler                         " Show cursor position.
+set ruler                                                  " Show cursor position.
 
-set incsearch                     " Highlight matches as you type.
-set hlsearch                      " Highlight matches.
+set incsearch                                              " Highlight matches as you type.
+set hlsearch                                               " Highlight matches.
 
-set wrap                          " Turn on line wrapping.
-set scrolloff=3                   " Show 3 lines of context around the cursor.
+set wrap                                                   " Turn on line wrapping.
+set scrolloff=3                                            " Show 3 lines of context around the cursor.
 
-set title                         " Set the terminal's title
+set title                                                  " Set the terminal's title
 
-set visualbell                    " No beeping.
+set visualbell                                             " No beeping.
 
 
 if exists('$SUDO_USER')
-  set nobackup                        " don't create root-owned files
-  set nowritebackup                   " don't create root-owned files
+  set nobackup                                             " don't create root-owned files
+  set nowritebackup                                        " don't create root-owned files
 else
   set backupdir=~/local/.vim/tmp/backup
-  set backupdir+=~/.vim/tmp/backup    " keep backup files out of the way
+  set backupdir+=~/.vim/tmp/backup                         " keep backup files out of the way
   set backupdir+=.
 endif
 
-set cursorline                        " highlight current line
+set cursorline                                             " highlight current line
 
 if exists('$SUDO_USER')
-  set noswapfile                      " don't create root-owned files
+  set noswapfile                                           " don't create root-owned files
 else
   set directory=~/local/.vim/tmp/swap//
-  set directory+=~/.vim/tmp/swap//    " keep swap files out of the way
+  set directory+=~/.vim/tmp/swap//                         " keep swap files out of the way
   set directory+=.
 endif
 
 if has('persistent_undo')
   if exists('$SUDO_USER')
-    set noundofile                    " don't create root-owned files
+    set noundofile                                         " don't create root-owned files
   else
     set undodir=~/local/.vim/tmp/undo
-    set undodir+=~/.vim/tmp/undo      " keep undo files out of the way
+    set undodir+=~/.vim/tmp/undo                           " keep undo files out of the way
     set undodir+=.
-    set undofile                      " actually use undo files
+    set undofile                                           " actually use undo files
   endif
 endif
 
 if has('viminfo')
   if exists('$SUDO_USER')
-    set viminfo=                      " don't create root-owned files
+    set viminfo=                                           " don't create root-owned files
   else
     if isdirectory('~/local/.vim/tmp')
       set viminfo+=n~/local/.vim/tmp/viminfo
@@ -82,26 +82,26 @@ if has('viminfo')
   endif
 endif
 
-set mouse=a                       " Use the mouse if available for scaling wins, activating tabs.
+set mouse=a                                                " Use the mouse if available for scaling wins, activating tabs.
 
 set list lcs=trail:·,tab:»·
 
 if has('linebreak')
-  let &showbreak='⤷ '                 " ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS (U+2937, UTF-8: E2 A4 B7)
+  let &showbreak='⤷ '                                      " ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS (U+2937, UTF-8: E2 A4 B7)
 endif
 
-set tabstop=2                    " Global tab width.
-set shiftwidth=2                 " And again, related.
-set expandtab                    " Use spaces instead of tabs
+set tabstop=2                                              " Global tab width.
+set shiftwidth=2                                           " And again, related.
+set expandtab                                              " Use spaces instead of tabs
 
-set laststatus=2                  " Show the status line all the time
+set laststatus=2                                           " Show the status line all the time
 " Useful status information at bottom of screen
 
-set lazyredraw                        " don't bother updating screen during macro playback
+set lazyredraw                                             " don't bother updating screen during macro playback
 
 " vundle init
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible                                           " be iMproved, required
+filetype off                                               " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -158,8 +158,8 @@ let g:UltiSnipsEditSplit="vertical"
 "  Plugin 'ascenator/L9', {'name': 'newL9'}
 "
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call vundle#end()                                          " required
+filetype plugin indent on                                  " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
