@@ -33,16 +33,62 @@ set title                         " Set the terminal's title
 
 set visualbell                    " No beeping.
 
-set nobackup                      " Don't make a backup before overwriting a file.
-set nowritebackup                 " And again.
-set directory=$HOME/.vim/tmp//,.  " Keep swap files in one location
+
+if exists('$SUDO_USER')
+  set nobackup                        " don't create root-owned files
+  set nowritebackup                   " don't create root-owned files
+else
+  set backupdir=~/local/.vim/tmp/backup
+  set backupdir+=~/.vim/tmp/backup    " keep backup files out of the way
+  set backupdir+=.
+endif
+
+set cursorline                        " highlight current line
+
+if exists('$SUDO_USER')
+  set noswapfile                      " don't create root-owned files
+else
+  set directory=~/local/.vim/tmp/swap//
+  set directory+=~/.vim/tmp/swap//    " keep swap files out of the way
+  set directory+=.
+endif
+
+if has('persistent_undo')
+  if exists('$SUDO_USER')
+    set noundofile                    " don't create root-owned files
+  else
+    set undodir=~/local/.vim/tmp/undo
+    set undodir+=~/.vim/tmp/undo      " keep undo files out of the way
+    set undodir+=.
+    set undofile                      " actually use undo files
+  endif
+endif
+
+if has('viminfo')
+  if exists('$SUDO_USER')
+    set viminfo=                      " don't create root-owned files
+  else
+    if isdirectory('~/local/.vim/tmp')
+      set viminfo+=n~/local/.vim/tmp/viminfo
+    else
+      set viminfo+=n~/.vim/tmp/viminfo " override ~/.viminfo default
+    endif
+
+    if !empty(glob('~/.vim/tmp/viminfo'))
+      if !filereadable(expand('~/.vim/tmp/viminfo'))
+        echoerr 'warning: ~/.vim/tmp/viminfo exists but is not readable'
+      endif
+    endif
+  endif
+endif
 
 set mouse=a                       " Use the mouse if available for scaling wins, activating tabs.
 
 set list lcs=trail:·,tab:»·
 
-set splitright                   " vertical splits open new window to the right
-set splitbelow                   " horizontal splits open new window to the bottom
+if has('linebreak')
+  let &showbreak='⤷ '                 " ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS (U+2937, UTF-8: E2 A4 B7)
+endif
 
 set tabstop=2                    " Global tab width.
 set shiftwidth=2                 " And again, related.
@@ -51,6 +97,7 @@ set expandtab                    " Use spaces instead of tabs
 set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
 
+set lazyredraw                        " don't bother updating screen during macro playback
 
 " vundle init
 set nocompatible              " be iMproved, required
