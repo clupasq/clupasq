@@ -33,6 +33,8 @@ set title                                                  " Set the terminal's 
 
 set visualbell                                             " No beeping.
 
+set fillchars=vert:┃                                       " Nice vertical separators
+
 
 if exists('$SUDO_USER')
   set nobackup                                             " don't create root-owned files
