@@ -91,7 +91,7 @@ set mouse=a                                                " Use the mouse if av
 set list lcs=trail:·,tab:»·
 
 if has('linebreak')
-  let &showbreak='⤷ '                                      " ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS (U+2937, UTF-8: E2 A4 B7)
+  let &showbreak='╰ '                                      " ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS (U+2937, UTF-8: E2 A4 B7)
 endif
 
 set splitright                                             " vertical splits open new window to the right
