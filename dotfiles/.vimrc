@@ -94,6 +94,9 @@ if has('linebreak')
   let &showbreak='⤷ '                                      " ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS (U+2937, UTF-8: E2 A4 B7)
 endif
 
+set splitright                                             " vertical splits open new window to the right
+set splitbelow                                             " horizontal splits open new window to the bottom
+
 set tabstop=2                                              " Global tab width.
 set shiftwidth=2                                           " And again, related.
 set expandtab                                              " Use spaces instead of tabs
