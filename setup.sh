@@ -34,6 +34,7 @@ function createVimTempDirs {
   mkdir -p "$HOME/.vim/tmp/backup"
   mkdir -p "$HOME/.vim/tmp/undo"
   mkdir -p "$HOME/.vim/tmp/swap"
+  mkdir -p "$HOME/.vim/tmp/view"
 }
 
 function installVundleForVimPlugins {
