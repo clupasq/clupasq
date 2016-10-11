@@ -4,107 +4,6 @@ set t_Co=256                                               " 256 colors...
 
 syntax enable                                              " Turn on syntax highlighting.
 
-runtime macros/matchit.vim                                 " Load the matchit plugin.
-
-set showcmd                                                " Display incomplete commands.
-set showmode                                               " Display the mode you're in.
-
-set backspace=indent,eol,start                             " Intuitive backspacing.
-
-set hidden                                                 " Handle multiple buffers better.
-
-set wildmenu                                               " Enhanced command line completion.
-set wildmode=list:longest                                  " Complete files like a shell.
-
-set ignorecase                                             " Case-insensitive searching.
-set smartcase                                              " But case-sensitive if expression contains a capital letter.
-
-set number                                                 " Show line numbers.
-set relativenumber
-set ruler                                                  " Show cursor position.
-
-set incsearch                                              " Highlight matches as you type.
-set hlsearch                                               " Highlight matches.
-
-set wrap                                                   " Turn on line wrapping.
-set scrolloff=3                                            " Show 3 lines of context around the cursor.
-
-set title                                                  " Set the terminal's title
-
-set visualbell                                             " No beeping.
-
-set fillchars=vert:┃                                       " Nice vertical separators
-
-set foldmethod=indent
-set foldlevelstart=20                                      " No indentation when opening files
-
-if exists('$SUDO_USER')
-  set nobackup                                             " don't create root-owned files
-  set nowritebackup                                        " don't create root-owned files
-else
-  set backupdir=~/local/.vim/tmp/backup
-  set backupdir+=~/.vim/tmp/backup                         " keep backup files out of the way
-  set backupdir+=.
-endif
-
-set cursorline                                             " highlight current line
-
-if exists('$SUDO_USER')
-  set noswapfile                                           " don't create root-owned files
-else
-  set directory=~/local/.vim/tmp/swap//
-  set directory+=~/.vim/tmp/swap//                         " keep swap files out of the way
-  set directory+=.
-endif
-
-if has('persistent_undo')
-  if exists('$SUDO_USER')
-    set noundofile                                         " don't create root-owned files
-  else
-    set undodir=~/local/.vim/tmp/undo
-    set undodir+=~/.vim/tmp/undo                           " keep undo files out of the way
-    set undodir+=.
-    set undofile                                           " actually use undo files
-  endif
-endif
-
-if has('viminfo')
-  if exists('$SUDO_USER')
-    set viminfo=                                           " don't create root-owned files
-  else
-    if isdirectory('~/local/.vim/tmp')
-      set viminfo+=n~/local/.vim/tmp/viminfo
-    else
-      set viminfo+=n~/.vim/tmp/viminfo " override ~/.viminfo default
-    endif
-
-    if !empty(glob('~/.vim/tmp/viminfo'))
-      if !filereadable(expand('~/.vim/tmp/viminfo'))
-        echoerr 'warning: ~/.vim/tmp/viminfo exists but is not readable'
-      endif
-    endif
-  endif
-endif
-
-set mouse=a                                                " Use the mouse if available for scaling wins, activating tabs.
-
-set list lcs=trail:·,tab:»·
-
-if has('linebreak')
-  let &showbreak='╰ '                                      " ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS (U+2937, UTF-8: E2 A4 B7)
-endif
-
-set splitright                                             " vertical splits open new window to the right
-set splitbelow                                             " horizontal splits open new window to the bottom
-
-set tabstop=2                                              " Global tab width.
-set shiftwidth=2                                           " And again, related.
-set expandtab                                              " Use spaces instead of tabs
-
-set laststatus=2                                           " Show the status line all the time
-" Useful status information at bottom of screen
-
-set lazyredraw                                             " don't bother updating screen during macro playback
 
 " vundle init
 set nocompatible                                           " be iMproved, required
@@ -182,9 +81,122 @@ filetype plugin indent on                                  " required
 
 " ========================================
 
-colorscheme jellybeans
 
-let mapleader = " "
+
+set showcmd                                                " Display incomplete commands.
+set showmode                                               " Display the mode you're in.
+
+set backspace=indent,eol,start                             " Intuitive backspacing.
+
+set hidden                                                 " Handle multiple buffers better.
+
+set wildmenu                                               " Enhanced command line completion.
+set wildmode=list:longest                                  " Complete files like a shell.
+
+set ignorecase                                             " Case-insensitive searching.
+set smartcase                                              " But case-sensitive if expression contains a capital letter.
+
+set number                                                 " Show line numbers.
+set relativenumber
+set ruler                                                  " Show cursor position.
+
+set incsearch                                              " Highlight matches as you type.
+set hlsearch                                               " Highlight matches.
+
+set wrap                                                   " Turn on line wrapping.
+set scrolloff=3                                            " Show 3 lines of context around the cursor.
+set sidescrolloff=3                                        " Same as above, but horizontally
+
+set title                                                  " Set the terminal's title
+
+set visualbell                                             " No beeping.
+
+set fillchars=vert:┃                                       " Nice vertical separators
+
+set foldmethod=indent
+set foldlevelstart=20                                      " No indentation when opening files
+
+if exists('$SUDO_USER')
+  set nobackup                                             " don't create root-owned files
+  set nowritebackup                                        " don't create root-owned files
+else
+  set backupdir=~/local/.vim/tmp/backup
+  set backupdir+=~/.vim/tmp/backup                         " keep backup files out of the way
+  set backupdir+=.
+endif
+
+set cursorline                                             " highlight current line
+
+if exists('$SUDO_USER')
+  set noswapfile                                           " don't create root-owned files
+else
+  set directory=~/local/.vim/tmp/swap//
+  set directory+=~/.vim/tmp/swap//                         " keep swap files out of the way
+  set directory+=.
+endif
+
+if has('persistent_undo')
+  if exists('$SUDO_USER')
+    set noundofile                                         " don't create root-owned files
+  else
+    set undodir=~/local/.vim/tmp/undo
+    set undodir+=~/.vim/tmp/undo                           " keep undo files out of the way
+    set undodir+=.
+    set undofile                                           " actually use undo files
+  endif
+endif
+
+if has('viminfo')
+  if exists('$SUDO_USER')
+    set viminfo=                                           " don't create root-owned files
+  else
+    if isdirectory('~/local/.vim/tmp')
+      set viminfo+=n~/local/.vim/tmp/viminfo
+    else
+      set viminfo+=n~/.vim/tmp/viminfo " override ~/.viminfo default
+    endif
+
+    if !empty(glob('~/.vim/tmp/viminfo'))
+      if !filereadable(expand('~/.vim/tmp/viminfo'))
+        echoerr 'warning: ~/.vim/tmp/viminfo exists but is not readable'
+      endif
+    endif
+  endif
+endif
+
+set mouse=a                                                " Use the mouse if available for scaling wins, activating tabs.
+
+set list lcs=trail:·,tab:»·
+
+if has('linebreak')
+  let &showbreak='╰ '                                      " ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS (U+2937, UTF-8: E2 A4 B7)
+endif
+
+set shortmess+=A                                           " ignore annoying swapfile messages
+set shortmess+=I                                           " no splash screen
+set shortmess+=O                                           " file-read message overwrites previous
+set shortmess+=T                                           " truncate non-file messages in middle
+set shortmess+=W                                           " don't echo "[w]"/"[written]" when writing
+set shortmess+=a                                           " use abbreviations in messages eg. `[RO]` instead of `[readonly]`
+set shortmess+=o                                           " overwrite file-written messages
+set shortmess+=t                                           " truncate file messages at start
+
+set splitright                                             " vertical splits open new window to the right
+set splitbelow                                             " horizontal splits open new window to the bottom
+
+set tabstop=2                                              " Global tab width.
+set shiftwidth=2                                           " And again, related.
+set shiftround                                             " always indent by multiple of shiftwidth
+set expandtab                                              " Use spaces instead of tabs
+
+set laststatus=2                                           " Show the status line all the time
+" Useful status information at bottom of screen
+
+set lazyredraw                                             " don't bother updating screen during macro playback
+
+
+
+colorscheme jellybeans
 
 if filereadable(".vimrc.local")
   source .vimrc.local
@@ -193,6 +205,9 @@ endif
 " ========
 " MAPPINGS
 " ========
+
+let mapleader = " "
+
 
 " VISUAL
 " ========

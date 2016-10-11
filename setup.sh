@@ -30,10 +30,16 @@ if [[ $HELP == "Y" ]]; then
   exit
 fi
 
+function createVimTempDirs {
+  mkdir -p "$HOME/.vim/tmp/backup"
+  mkdir -p "$HOME/.vim/tmp/undo"
+  mkdir -p "$HOME/.vim/tmp/swap"
+}
+
 function installVundleForVimPlugins {
   vundle_dir="$HOME/.vim/bundle/Vundle.vim"
   if [ ! -d "$vundle_dir" ]; then
-    git clone https://github.com/VundleVim/Vundle.vim.git $vundle_dir 
+    git clone https://github.com/VundleVim/Vundle.vim.git $vundle_dir
   else
     echo "Vundle appears to be already installed - skipping."
   fi
@@ -47,12 +53,12 @@ function createDotfileLinks {
     dest="$HOME/$(basename $f)"
 
     if [ ! -f $dest ] && [ ! -h $dest ]; then
-      ln -s "$source_dir/$f" $dest 
+      ln -s "$source_dir/$f" $dest
       echo "$f - linked OK"
     else
       if [[ $OVERWRITE == "Y" ]]; then
         rm -rf $dest
-        ln -s "$source_dir/$f" $dest 
+        ln -s "$source_dir/$f" $dest
         echo "$f - overwritten!"
       else
         echo "$f - already present (not overwritten; use -o to overwrite)"
@@ -61,5 +67,6 @@ function createDotfileLinks {
   done
 }
 
+createVimTempDirs
 installVundleForVimPlugins
 createDotfileLinks
