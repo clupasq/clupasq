@@ -1,10 +1,10 @@
-# w0lf-dotfiles
+# clupasq
 
 Here are my dotfiles.
 
 ## Installation
 
-    cd
-    git clone https://github.com/wolfascu/w0lf-dotfiles.git
-    cd w0lf-dotfiles
+    cd ~/.config
+    git clone https://github.com/clupasq/clupasq.git
+    cd clupasq
     ./setup.sh
