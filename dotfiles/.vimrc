@@ -164,6 +164,14 @@ if has('viminfo')
   endif
 endif
 
+if has('mksession')
+  if isdirectory('~/local/.vim/tmp')
+    set viewdir=~/local/.vim/tmp/view
+  else
+    set viewdir=~/.vim/tmp/view                            " override ~/.vim/view default
+  endif                                                    " save/restore just these (with `:{mk,load}view`)
+endif
+
 set mouse=a                                                " Use the mouse if available for scaling wins, activating tabs.
 
 set list lcs=trail:·,tab:»·
