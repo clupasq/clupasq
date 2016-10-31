@@ -32,6 +32,7 @@ Plugin 'christoomey/vim-tmux-runner'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'wincent/loupe'
+Plugin 'editorconfig/editorconfig-vim'
 
 
 """" ULTISNIPS """"""""""""""""""""
