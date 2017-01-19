@@ -46,20 +46,22 @@ function installVundleForVimPlugins {
   fi
 }
 
-function createDotfileLinks {
-  source_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/dotfiles"
+source_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-  for f in $(ls -A $source_dir)
+function createDotfileLinks {
+  dotfiles_dir="$source_dir/dotfiles"
+
+  for f in $(ls -A $dotfiles_dir)
   do
     dest="$HOME/$(basename $f)"
 
     if [ ! -f $dest ] && [ ! -h $dest ]; then
-      ln -s "$source_dir/$f" $dest
+      ln -s "$dotfiles_dir/$f" $dest
       echo "$f - linked OK"
     else
       if [[ $OVERWRITE == "Y" ]]; then
         rm -rf $dest
-        ln -s "$source_dir/$f" $dest
+        ln -s "$dotfiles_dir/$f" $dest
         echo "$f - overwritten!"
       else
         echo "$f - already present (not overwritten; use -o to overwrite)"
@@ -68,6 +70,25 @@ function createDotfileLinks {
   done
 }
 
+function linkToBinDir {
+  src="$source_dir/bin"
+  dest="$HOME/.bin_clupasq"
+  if [ ! -d $dest ] && [ ! -h $dest ]; then
+    ln -s $src $dest
+    echo "Link to bin directory created."
+  else
+    if [[ $OVERWRITE == "Y" ]]; then
+      rm -rf $dest
+      ln -s $src $dest
+      echo "Link to bin directory overwritten."
+    else
+      echo "Bin directory already present (not overwritten; use -o to overwrite)"
+    fi
+  fi
+}
+
 createVimTempDirs
 installVundleForVimPlugins
 createDotfileLinks
+linkToBinDir
+
