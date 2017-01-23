@@ -2,6 +2,7 @@
 
 NAME=haskelltest
 FILENAME=${1-$HOME/test.hs}
+EXECUTABLE=/tmp/haskell
 
 if tmux has-session -t $NAME 2> /dev/null; then
   # session already exists; connect to it
@@ -17,7 +18,7 @@ tmux new-session -s $NAME -d
 tmux send-keys -t $NAME "vim $FILENAME" C-m
 
 tmux split-window -h -t $NAME
-WATCH_COMMAND="while true; do inotifywait -e MODIFY $FILENAME; clear; time ghci $FILENAME; done"
+WATCH_COMMAND="while true; do inotifywait -e MODIFY $FILENAME; clear; time ghc -o $EXECUTABLE $FILENAME && time $EXECUTABLE; done"
 tmux send-keys -t $NAME "$WATCH_COMMAND" C-m
 
 # go back to first pane
