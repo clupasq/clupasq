@@ -18,7 +18,7 @@ tmux new-session -s $NAME -d
 tmux send-keys -t $NAME "vim $FILENAME" C-m
 
 tmux split-window -h -t $NAME
-WATCH_COMMAND="while true; do inotifywait -e MODIFY $FILENAME; clear; time runghc $FILENAME; done"
+WATCH_COMMAND="while true; do inotifywait -e MODIFY $FILENAME; clear; time stack runghc $FILENAME; done"
 tmux send-keys -t $NAME "$WATCH_COMMAND" C-m
 
 # go back to first pane
