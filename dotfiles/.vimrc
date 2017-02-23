@@ -203,9 +203,11 @@ set laststatus=2                                           " Show the status lin
 
 set lazyredraw                                             " don't bother updating screen during macro playback
 
-
-
-colorscheme jellybeans
+try
+  colorscheme jellybeans
+catch /^Vim\%((\a\+)\)\=:E185/
+  " deal with it
+endtry
 
 if filereadable(".vimrc.local")
   source .vimrc.local
