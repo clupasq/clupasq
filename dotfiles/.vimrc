@@ -209,6 +209,9 @@ catch /^Vim\%((\a\+)\)\=:E185/
   " deal with it
 endtry
 
+" make file splits more obvious by changing the colors of inactive status bars
+hi StatusLineNC ctermfg=6 ctermbg=59 cterm=NONE
+
 if filereadable(".vimrc.local")
   source .vimrc.local
 endif
