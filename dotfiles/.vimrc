@@ -15,11 +15,11 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
+let isFzfPresent = executable('fzf')
+
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'nanotech/jellybeans.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_custom_ignore = 'node_modules\|git'
 Plugin 'ngmy/vim-rubocop'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'henrik/vim-indexed-search'
@@ -34,6 +34,14 @@ Plugin 'tpope/vim-repeat'
 Plugin 'wincent/loupe'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'itchyny/vim-haskell-indent'
+if isFzfPresent
+  Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plugin 'junegunn/fzf.vim'
+  nnoremap <c-p> :FZF<cr>
+else
+  Plugin 'ctrlpvim/ctrlp.vim'
+  let g:ctrlp_custom_ignore = 'node_modules\|git'
+endif
 
 
 """" ULTISNIPS """"""""""""""""""""
