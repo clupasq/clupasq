@@ -54,7 +54,8 @@ function createDotfileLinks {
   shopt -s dotglob # also iterate hidden files with glob
   for f in "$dotfiles_dir"/*
   do
-    dest="$HOME/$(basename "$f")"
+    f="$(basename $f)" 
+    dest="$HOME/$f"
     if [ ! -f "$dest" ] && [ ! -h "$dest" ]; then
       ln -s "$dotfiles_dir/$f" "$dest"
       echo "$f - linked OK"
