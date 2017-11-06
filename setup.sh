@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while [[ $# > 0 ]]
+while [[ $# -gt 0 ]]
 do
   key="$1"
 
@@ -40,7 +40,7 @@ function createVimTempDirs {
 function installVundleForVimPlugins {
   vundle_dir="$HOME/.vim/bundle/Vundle.vim"
   if [ ! -d "$vundle_dir" ]; then
-    git clone https://github.com/VundleVim/Vundle.vim.git $vundle_dir
+    git clone https://github.com/VundleVim/Vundle.vim.git "$vundle_dir"
   else
     echo "Vundle appears to be already installed - skipping."
   fi
@@ -51,35 +51,37 @@ source_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 function createDotfileLinks {
   dotfiles_dir="$source_dir/dotfiles"
 
-  for f in $(ls -A $dotfiles_dir)
+  shopt -s dotglob # also iterate hidden files with glob
+  for f in "$dotfiles_dir"/*
   do
-    dest="$HOME/$(basename $f)"
-
-    if [ ! -f $dest ] && [ ! -h $dest ]; then
-      ln -s "$dotfiles_dir/$f" $dest
+    f="$(basename $f)" 
+    dest="$HOME/$f"
+    if [ ! -f "$dest" ] && [ ! -h "$dest" ]; then
+      ln -s "$dotfiles_dir/$f" "$dest"
       echo "$f - linked OK"
     else
       if [[ $OVERWRITE == "Y" ]]; then
-        rm -rf $dest
-        ln -s "$dotfiles_dir/$f" $dest
+        rm -rf "$dest"
+        ln -s "$dotfiles_dir/$f" "$dest"
         echo "$f - overwritten!"
       else
         echo "$f - already present (not overwritten; use -o to overwrite)"
       fi
     fi
   done
+  shopt -u dotglob
 }
 
 function linkToBinDir {
   src="$source_dir/bin"
   dest="$HOME/.bin_clupasq"
-  if [ ! -d $dest ] && [ ! -h $dest ]; then
-    ln -s $src $dest
+  if [ ! -d "$dest" ] && [ ! -h "$dest" ]; then
+    ln -s "$src" "$dest"
     echo "Link to bin directory created."
   else
     if [[ $OVERWRITE == "Y" ]]; then
-      rm -rf $dest
-      ln -s $src $dest
+      rm -rf "$dest"
+      ln -s "$src" "$dest"
       echo "Link to bin directory overwritten."
     else
       echo "Bin directory already present (not overwritten; use -o to overwrite)"
