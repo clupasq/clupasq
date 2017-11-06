@@ -294,3 +294,8 @@ nnoremap <Leader>p :echo expand('%')<CR>
 
 " <LocalLeader>e -- Edit file, starting in same directory as current file.
 nnoremap <Leader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
+
+
+" VimTmuxRunner - run current paragraph
+nnoremap <Leader>sp myvip:VtrSendLinesToRunner<CR>`y
+
