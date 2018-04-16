@@ -42,6 +42,9 @@ else
   Plugin 'ctrlpvim/ctrlp.vim'
   let g:ctrlp_custom_ignore = 'node_modules\|git'
 endif
+" TypeScript
+Plugin 'leafgarland/typescript-vim'
+Plugin 'Quramy/tsuquyomi'
 
 """" VIM - align """"""""""""""""""
 Plugin 'junegunn/vim-easy-align'
