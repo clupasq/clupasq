@@ -25,7 +25,7 @@ tmux rename-window -t $NAME "git"
 tmux send-keys -t $NAME "git status" C-m
 tmux split-window -h -p 25 -t $NAME
 tmux send-keys -t $NAME "yarn compile:watch" C-m
-tmux select-pane -t $NAME -p -L
+tmux select-pane -t $NAME -L
 tmux select-window -t $NAME -p
 
 # go back to first pane
