@@ -33,6 +33,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'wincent/loupe'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'danro/rename.vim'
 Plugin 'itchyny/vim-haskell-indent'
 if isFzfPresent
   Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -45,6 +46,8 @@ endif
 " TypeScript
 Plugin 'leafgarland/typescript-vim'
 Plugin 'Quramy/tsuquyomi'
+Plugin 'b4winckler/vim-angry'
+Plugin 'vim-syntastic/syntastic'
 
 """" VIM - align """"""""""""""""""
 Plugin 'junegunn/vim-easy-align'
@@ -235,6 +238,23 @@ if filereadable(".vimrc.local")
   source .vimrc.local
 endif
 
+
+
+
+
+" syntactic
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_typescript_checkers = ['tslint']
+
 " ========
 " MAPPINGS
 " ========
@@ -273,6 +293,7 @@ nnoremap <C-l> <C-w>l
 " unset K (manual lookup)
 nnoremap K <nop>
 
+
 " Repurpose cursor keys for use with the quickfix window
 nnoremap <silent> <Up> :cprevious<CR>
 nnoremap <silent> <Down> :cnext<CR>
@@ -301,4 +322,8 @@ nnoremap <Leader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
 
 " VimTmuxRunner - run current paragraph
 nnoremap <Leader>sp myvip:VtrSendLinesToRunner<CR>`y
+
+
+" autocmd FileType typescript setlocal shiftwidth=4 tabstop=4
+" autocmd FileType typescript nnoremap <Leader>. <nop>
 
