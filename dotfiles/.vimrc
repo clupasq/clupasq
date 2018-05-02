@@ -20,6 +20,7 @@ let isFzfPresent = executable('fzf')
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'nanotech/jellybeans.vim'
+Plugin 'flazz/vim-colorschemes'
 Plugin 'ngmy/vim-rubocop'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'henrik/vim-indexed-search'
@@ -39,6 +40,9 @@ if isFzfPresent
   Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plugin 'junegunn/fzf.vim'
   nnoremap <c-p> :FZF<cr>
+  nnoremap <leader>F :Lines<cr>
+  nnoremap <leader>f :BLines<cr>
+  nnoremap <leader>b :Buffers<cr>
 else
   Plugin 'ctrlpvim/ctrlp.vim'
   let g:ctrlp_custom_ignore = 'node_modules\|git'
@@ -324,6 +328,12 @@ nnoremap <Leader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
 nnoremap <Leader>sp myvip:VtrSendLinesToRunner<CR>`y
 
 
-" autocmd FileType typescript setlocal shiftwidth=4 tabstop=4
-" autocmd FileType typescript nnoremap <Leader>. <nop>
+" Tsuquyomi bindings
+nnoremap <Leader>rr :TsuRenameSymbol<CR>
+nnoremap <Leader>i :TsuImport<CR>
+nnoremap <Leader>q :TsuQuickFix<CR>
+" still useful while not in develop's version of .editorconfig
+autocmd FileType typescript setlocal shiftwidth=4 tabstop=4
+"=====================
+
 
