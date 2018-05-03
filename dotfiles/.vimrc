@@ -346,9 +346,12 @@ nnoremap <Leader>sp myvip:VtrSendLinesToRunner<CR>`y
 
 
 " Tsuquyomi bindings
-nnoremap <Leader>rr :TsuRenameSymbol<CR>
-nnoremap <Leader>i :TsuImport<CR>
-nnoremap <Leader>q :TsuQuickFix<CR>
+autocmd FileType typescript nmap <buffer> <Leader>r <Plug>(TsuquyomiRenameSymbol)
+autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbolC)
+autocmd FileType typescript nmap <buffer> <Leader>i <Plug>(TsuImport)
+autocmd FileType typescript nmap <buffer> <Leader>q <Plug>(TsuQuickFix)
+autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+
 " still useful while not in develop's version of .editorconfig
 autocmd FileType typescript setlocal shiftwidth=4 tabstop=4
 "=====================
