@@ -47,11 +47,11 @@ else
   Plugin 'ctrlpvim/ctrlp.vim'
   let g:ctrlp_custom_ignore = 'node_modules\|git'
 endif
+Plugin 'b4winckler/vim-angry'
+Plugin 'vim-syntastic/syntastic'
 " TypeScript
 Plugin 'leafgarland/typescript-vim'
 Plugin 'Quramy/tsuquyomi'
-Plugin 'b4winckler/vim-angry'
-Plugin 'vim-syntastic/syntastic'
 
 """" VIM - align """"""""""""""""""
 Plugin 'junegunn/vim-easy-align'
@@ -59,6 +59,23 @@ Plugin 'junegunn/vim-easy-align'
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+"""""""""""""""""""""""""""""""""""
+
+
+"""" FZF send to quickfix """"""""""""""""""""
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+      \ 'ctrl-q': function('s:build_quickfix_list'),
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
+
+let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 """""""""""""""""""""""""""""""""""
 
 """" ULTISNIPS """"""""""""""""""""
