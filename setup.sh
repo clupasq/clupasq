@@ -37,13 +37,12 @@ function createVimTempDirs {
   mkdir -p "$HOME/.vim/tmp/view"
 }
 
-function installVundleForVimPlugins {
-  vundle_dir="$HOME/.vim/bundle/Vundle.vim"
-  if [ ! -d "$vundle_dir" ]; then
-    git clone https://github.com/VundleVim/Vundle.vim.git "$vundle_dir"
-  else
-    echo "Vundle appears to be already installed - skipping."
-  fi
+function createNeoVimConfiguration {
+  mkdir -p "$HOME/.config/nvim"
+  echo "
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
+source ~/.vimrc" > "$HOME/.config/nvim/init.vim"
 }
 
 source_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -54,7 +53,7 @@ function createDotfileLinks {
   shopt -s dotglob # also iterate hidden files with glob
   for f in "$dotfiles_dir"/*
   do
-    f="$(basename $f)" 
+    f="$(basename $f)"
     dest="$HOME/$f"
     if [ ! -f "$dest" ] && [ ! -h "$dest" ]; then
       ln -s "$dotfiles_dir/$f" "$dest"
@@ -90,7 +89,7 @@ function linkToBinDir {
 }
 
 createVimTempDirs
-installVundleForVimPlugins
+createNeoVimConfiguration
 createDotfileLinks
 linkToBinDir
 
