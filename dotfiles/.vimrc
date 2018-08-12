@@ -26,6 +26,7 @@ Plug 'tomtom/tcomment_vim'
 Plug 'henrik/vim-indexed-search'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+let g:airline_theme="base16_ocean"
 "Plug 'Valloric/YouCompleteMe'
 Plug 'mattn/emmet-vim'
 Plug 'bogado/file-line'
@@ -227,15 +228,9 @@ catch /^Vim\%((\a\+)\)\=:E185/
   " deal with it
 endtry
 
-" make file splits more obvious by changing the colors of inactive status bars
-hi StatusLineNC ctermfg=7 ctermbg=59 cterm=NONE
-
 if filereadable(".vimrc.local")
   source .vimrc.local
 endif
-
-
-
 
 
 " syntactic
@@ -330,5 +325,4 @@ autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()
 " still useful while not in develop's version of .editorconfig
 autocmd FileType typescript setlocal shiftwidth=4 tabstop=4
 "=====================
-
 
