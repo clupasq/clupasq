@@ -19,8 +19,6 @@ call plug#begin('~/.vim/plugged')
 
 let isFzfPresent = executable('fzf')
 
-" let Vundle manage Vundle, required
-Plug 'VundleVim/Vundle.vim'
 Plug 'nanotech/jellybeans.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'ngmy/vim-rubocop'
@@ -54,6 +52,9 @@ endif
 Plug 'b4winckler/vim-angry'
 Plug 'vim-syntastic/syntastic'
 " TypeScript
+if has("nvim")
+  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+endif
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
 
