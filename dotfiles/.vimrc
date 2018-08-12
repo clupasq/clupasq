@@ -9,52 +9,54 @@ syntax enable                                              " Turn on syntax high
 set nocompatible                                           " be iMproved, required
 filetype off                                               " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
 
 let isFzfPresent = executable('fzf')
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'ngmy/vim-rubocop'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'henrik/vim-indexed-search'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'mattn/emmet-vim'
-Plugin 'bogado/file-line'
-Plugin 'bronson/vim-trailing-whitespace'
+Plug 'VundleVim/Vundle.vim'
+Plug 'nanotech/jellybeans.vim'
+Plug 'flazz/vim-colorschemes'
+Plug 'ngmy/vim-rubocop'
+Plug 'tomtom/tcomment_vim'
+Plug 'henrik/vim-indexed-search'
+"Plug 'Valloric/YouCompleteMe'
+Plug 'mattn/emmet-vim'
+Plug 'bogado/file-line'
+Plug 'bronson/vim-trailing-whitespace'
 let g:VtrUseVtrMaps = 1
-Plugin 'christoomey/vim-tmux-runner'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'wincent/loupe'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'danro/rename.vim'
-Plugin 'itchyny/vim-haskell-indent'
+Plug 'christoomey/vim-tmux-runner'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'wincent/loupe'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'danro/rename.vim'
+Plug 'itchyny/vim-haskell-indent'
 if isFzfPresent
-  Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plugin 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
   nnoremap <c-p> :FZF<cr>
   nnoremap <leader>F :Lines<cr>
   nnoremap <leader>f :BLines<cr>
   nnoremap <leader>b :Buffers<cr>
 else
-  Plugin 'ctrlpvim/ctrlp.vim'
+  Plug 'ctrlpvim/ctrlp.vim'
   let g:ctrlp_custom_ignore = 'node_modules\|git'
 endif
-Plugin 'b4winckler/vim-angry'
-Plugin 'vim-syntastic/syntastic'
+Plug 'b4winckler/vim-angry'
+Plug 'vim-syntastic/syntastic'
 " TypeScript
-Plugin 'leafgarland/typescript-vim'
-Plugin 'Quramy/tsuquyomi'
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
 
 """" VIM - align """"""""""""""""""
-Plugin 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
@@ -80,9 +82,9 @@ let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 
 """" ULTISNIPS """"""""""""""""""""
 " Track the engine.
-Plugin 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -91,39 +93,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
 """""""""""""""""""""""""""""""""""
 
-"  " The following are examples of different formats supported.
-"  " Keep Plugin commands between vundle#begin/end.
-"  " plugin on GitHub repo
-"  Plugin 'tpope/vim-fugitive'
-"  " plugin from http://vim-scripts.org/vim/scripts.html
-"  Plugin 'L9'
-"  " Git plugin not hosted on GitHub
-"  Plugin 'git://git.wincent.com/command-t.git'
-"  " git repos on your local machine (i.e. when working on your own plugin)
-"  Plugin 'file:///home/gmarik/path/to/plugin'
-"  " The sparkup vim script is in a subdirectory of this repo called vim.
-"  " Pass the path to set the runtimepath properly.
-"  Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-"  " Install L9 and avoid a Naming conflict if you've already installed a
-"  " different version somewhere else.
-"  Plugin 'ascenator/L9', {'name': 'newL9'}
-"
-" All of your Plugins must be added before the following line
-call vundle#end()                                          " required
-filetype plugin indent on                                  " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+call plug#end()
 
-" ========================================
+filetype plugin indent on
 
 
 
