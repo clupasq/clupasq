@@ -354,6 +354,8 @@ autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()
 
 " still useful while not in develop's version of .editorconfig
 autocmd FileType typescript setlocal shiftwidth=4 tabstop=4
+autocmd FileType php setlocal shiftwidth=4 tabstop=4
 "=====================
 
+let g:netrw_liststyle = 3
 
