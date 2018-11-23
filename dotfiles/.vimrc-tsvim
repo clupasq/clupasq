@@ -17,6 +17,8 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+let mapleader = " "
+
 let isFzfPresent = executable('fzf')
 
 Plug 'nanotech/jellybeans.vim'
@@ -61,12 +63,14 @@ Plug 'vim-syntastic/syntastic'
 " Plug 'Quramy/tsuquyomi'
 
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
-" For async completion
-Plug 'Shougo/deoplete.nvim'
-" For Denite features
-Plug 'Shougo/denite.nvim'
-Plug 'Shougo/echodoc.vim'
+if has("nvim")
+  Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+  " For async completion
+  Plug 'Shougo/deoplete.nvim'
+  " For Denite features
+  Plug 'Shougo/denite.nvim'
+  Plug 'Shougo/echodoc.vim'
+endif
 
 " Enable deoplete at startup
 let g:deoplete#enable_at_startup = 1
@@ -261,8 +265,6 @@ let g:syntastic_typescript_checkers = ['tslint']
 " ========
 " MAPPINGS
 " ========
-
-let mapleader = " "
 
 
 " VISUAL
