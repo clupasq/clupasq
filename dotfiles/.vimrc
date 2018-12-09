@@ -9,6 +9,8 @@ syntax enable                                              " Turn on syntax high
 set nocompatible                                           " be iMproved, required
 filetype off                                               " required
 
+let mapleader = " "
+
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -260,8 +262,6 @@ let g:syntastic_typescript_checkers = ['tslint']
 " ========
 " MAPPINGS
 " ========
-
-let mapleader = " "
 
 
 " VISUAL
