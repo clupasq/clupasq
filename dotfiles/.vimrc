@@ -52,12 +52,23 @@ else
 endif
 Plug 'b4winckler/vim-angry'
 Plug 'vim-syntastic/syntastic'
+
 " TypeScript
-if has("nvim")
-  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-endif
-Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/tsuquyomi'
+" if has("nvim")
+"   Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+" endif
+" Plug 'leafgarland/typescript-vim'
+" Plug 'Quramy/tsuquyomi'
+
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+" For async completion
+Plug 'Shougo/deoplete.nvim'
+" For Denite features
+Plug 'Shougo/denite.nvim'
+
+" Enable deoplete at startup
+let g:deoplete#enable_at_startup = 1
 
 """" VIM - align """"""""""""""""""
 Plug 'junegunn/vim-easy-align'
@@ -316,11 +327,13 @@ nnoremap <Leader>sp myvip:VtrSendLinesToRunner<CR>`y
 
 
 " Tsuquyomi bindings
-autocmd FileType typescript nmap <buffer> <Leader>r <Plug>(TsuquyomiRenameSymbol)
-autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbolC)
-autocmd FileType typescript nmap <buffer> <Leader>i <Plug>(TsuImport)
-autocmd FileType typescript nmap <buffer> <Leader>q <Plug>(TsuQuickFix)
-autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+autocmd FileType typescript nnoremap <buffer> <Leader>r :TSRename<cr>
+autocmd FileType typescript nnoremap <buffer> <Leader>i :TSImport<cr>
+autocmd FileType typescript nnoremap <buffer> <Leader>q :TSGetCodeFix<cr>
+" autocmd FileType typescript nnoremap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+
+autocmd FileType typescript nnoremap <c-]> :TSDef<cr>
+autocmd FileType typescript nnoremap <c-^> :TSRefs<cr>
 
 " still useful while not in develop's version of .editorconfig
 autocmd FileType typescript setlocal shiftwidth=4 tabstop=4
