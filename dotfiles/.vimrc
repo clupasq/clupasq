@@ -55,19 +55,14 @@ endif
 Plug 'b4winckler/vim-angry'
 Plug 'vim-syntastic/syntastic'
 
-" TypeScript
-" if has("nvim")
-"   Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-" endif
-" Plug 'leafgarland/typescript-vim'
-" Plug 'Quramy/tsuquyomi'
-
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
-" For async completion
-Plug 'Shougo/deoplete.nvim'
-" For Denite features
-Plug 'Shougo/denite.nvim'
+if has("nvim")
+  Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+  " For async completion
+  Plug 'Shougo/deoplete.nvim'
+  " For Denite features
+  Plug 'Shougo/denite.nvim'
+endif
 
 " Enable deoplete at startup
 let g:deoplete#enable_at_startup = 1
