@@ -321,14 +321,13 @@ nnoremap <Leader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
 nnoremap <Leader>sp myvip:VtrSendLinesToRunner<CR>`y
 
 
-" Tsuquyomi bindings
+" TypeScript bindings
 autocmd FileType typescript nnoremap <buffer> <Leader>r :TSRename<cr>
 autocmd FileType typescript nnoremap <buffer> <Leader>i :TSImport<cr>
 autocmd FileType typescript nnoremap <buffer> <Leader>q :TSGetCodeFix<cr>
-" autocmd FileType typescript nnoremap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
-
-autocmd FileType typescript nnoremap <c-]> :TSDef<cr>
-autocmd FileType typescript nnoremap <c-^> :TSRefs<cr>
+autocmd FileType typescript nnoremap <buffer> <Leader>t :TSType<cr>
+autocmd FileType typescript nnoremap <buffer> <c-]> :TSDef<cr>
+autocmd FileType typescript nnoremap <buffer> <c-^> :TSRefs<cr>
 
 " still useful while not in develop's version of .editorconfig
 autocmd FileType typescript setlocal shiftwidth=4 tabstop=4
