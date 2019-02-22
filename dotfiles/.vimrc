@@ -62,6 +62,11 @@ if has("nvim")
   Plug 'Shougo/deoplete.nvim'
   " For Denite features
   Plug 'Shougo/denite.nvim'
+
+  " Java
+  Plug 'artur-shaik/vim-javacomplete2'
+  autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
 endif
 
 " Enable deoplete at startup
