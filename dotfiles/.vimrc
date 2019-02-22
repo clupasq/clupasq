@@ -66,6 +66,10 @@ if has("nvim")
   " Java
   Plug 'artur-shaik/vim-javacomplete2'
   autocmd FileType java setlocal omnifunc=javacomplete#Complete
+  autocmd BufWritePost *.java
+      \ if filereadable('tags') |
+      \   call system('ctags -a '.expand('%')) |
+      \ endif
 
 endif
 
@@ -235,6 +239,7 @@ set laststatus=2                                           " Show the status lin
 set lazyredraw                                             " don't bother updating screen during macro playback
 
 try
+  " colorscheme Atelier_EstuaryDark
   colorscheme jellybeans
 catch /^Vim\%((\a\+)\)\=:E185/
   " deal with it
