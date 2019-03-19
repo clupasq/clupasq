@@ -55,6 +55,8 @@ endif
 Plug 'b4winckler/vim-angry'
 Plug 'vim-syntastic/syntastic'
 
+Plug 'udalov/kotlin-vim'
+
 Plug 'HerringtonDarkholme/yats.vim'
 if has("nvim")
   Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
@@ -97,6 +99,14 @@ let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-x': 'split',
       \ 'ctrl-v': 'vsplit' }
+
+function! g:FZFGitOnly()
+    let $FZF_DEFAULT_COMMAND=' (git ls-tree -r --name-only HEAD || find . -path "*/\.*" -prune -o -type f -print -o -type l -print | sed s/^..//) 2> /dev/null'
+endfunction
+
+function! g:FZFAllFiles()
+    let $FZF_DEFAULT_COMMAND="command find -L \$dir -type f 2> /dev/null | sed '1d; s#^\./##'"
+endfunction
 
 """""""""""""""""""""""""""""""""""
 
@@ -228,8 +238,8 @@ set shortmess+=t                                           " truncate file messa
 set splitright                                             " vertical splits open new window to the right
 set splitbelow                                             " horizontal splits open new window to the bottom
 
-set tabstop=2                                              " Global tab width.
-set shiftwidth=2                                           " And again, related.
+set tabstop=4                                              " Global tab width.
+set shiftwidth=4                                           " And again, related.
 set shiftround                                             " always indent by multiple of shiftwidth
 set expandtab                                              " Use spaces instead of tabs
 
@@ -262,6 +272,10 @@ let g:syntastic_check_on_wq = 0
 
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_typescript_checkers = ['tslint']
+
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': ['java'] }
 
 " ========
 " MAPPINGS
