@@ -41,6 +41,7 @@ Plug 'wincent/loupe'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'danro/rename.vim'
 Plug 'itchyny/vim-haskell-indent'
+Plug 'terryma/vim-multiple-cursors'
 if isFzfPresent
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
