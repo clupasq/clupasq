@@ -10,7 +10,7 @@ if tmux has-session -t $NAME 2> /dev/null; then
   exit
 fi
 
-touch $FILENAME
+touch "$FILENAME"
 
 # session does not exist; let's create it
 tmux new-session -s $NAME -d
