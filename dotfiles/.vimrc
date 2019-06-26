@@ -249,6 +249,29 @@ set laststatus=2                                           " Show the status lin
 
 set lazyredraw                                             " don't bother updating screen during macro playback
 
+" Dark
+" ----
+" jellybeans
+" lucius
+" wombat256dave
+" seoul256
+" iceberg
+" darth
+" lizard256
+"
+"
+" Very Dark
+" ---------
+" hybrid
+" sorcerer
+" spacegray
+"
+"
+" Light
+" -----
+" hybrid-light
+" summerfruit256
+
 try
   " colorscheme Atelier_EstuaryDark
   colorscheme jellybeans
