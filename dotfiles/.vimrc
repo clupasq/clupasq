@@ -367,6 +367,12 @@ nnoremap <Leader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
 " VimTmuxRunner - run current paragraph
 nnoremap <Leader>sp myvip:VtrSendLinesToRunner<CR>`y
 
+" Python things
+let g:VtrStripLeadingWhitespace = 0
+" let g:VtrClearEmptyLines = 0
+" let g:VtrAppendNewline = 1
+let g:pymode_python = 'python3'
+
 
 " TypeScript bindings
 autocmd FileType typescript nnoremap <buffer> <Leader>r :TSRename<cr>
