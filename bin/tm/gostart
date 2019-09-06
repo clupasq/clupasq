@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+
+NAME=bolt-run-services
+
+cd ~/workspace/blt/server
+
+if tmux has-session -t $NAME 2> /dev/null; then
+  # session already exists; connect to it
+  tmux attach -t $NAME
+  exit
+fi
+
+
+# session does not exist; let's create it
+tmux new-session -s $NAME -d
+
+tmux send-keys -t $NAME "yarn start"
+tmux split-window -h -t $NAME
+tmux send-keys -t $NAME "nodemon src/server-"
+
+tmux -2 attach-session -t $NAME

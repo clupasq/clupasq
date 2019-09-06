@@ -1,6 +1,7 @@
-# run this file by adding the following line to your .bashrc:
+# run this file by adding the following line to your .bash_profile:
 # source $HOME/.bashrc_clupasq
 
 export PATH="$PATH:$HOME/.bin_clupasq" # Add bin directory to PATH
 export PATH="$PATH:$HOME/.bin_work" # Add bin directory to PATH
 
+export LC_ALL=en_US.UTF-8
