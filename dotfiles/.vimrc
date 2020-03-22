@@ -23,6 +23,7 @@ let isFzfPresent = executable('fzf')
 
 Plug 'nanotech/jellybeans.vim'
 Plug 'flazz/vim-colorschemes'
+Plug 'vale1410/vim-minizinc'
 Plug 'ngmy/vim-rubocop'
 Plug 'tomtom/tcomment_vim'
 Plug 'henrik/vim-indexed-search'
