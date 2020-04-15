@@ -43,6 +43,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'danro/rename.vim'
 Plug 'itchyny/vim-haskell-indent'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'junegunn/goyo.vim'
 if isFzfPresent
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
