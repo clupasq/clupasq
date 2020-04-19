@@ -379,7 +379,7 @@ let g:pymode_python = 'python3'
 " TypeScript bindings
 autocmd FileType typescript nnoremap <buffer> <Leader>r :TSRename<cr>
 autocmd FileType typescript nnoremap <buffer> <Leader>i :TSGetCodeFix<cr>
-autocmd FileType typescript nnoremap <buffer> <Leader>q :TSGetCodeFix<cr>
+autocmd FileType typescript nnoremap <buffer> <Leader>x :TSGetErrorFull<cr>
 autocmd FileType typescript nnoremap <buffer> <Leader>t :TSType<cr>
 autocmd FileType typescript nnoremap <buffer> <Leader>d :TSDoc<cr>
 autocmd FileType typescript nnoremap <buffer> <c-]> :TSDef<cr>
