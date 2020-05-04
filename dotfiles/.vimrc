@@ -392,4 +392,9 @@ autocmd FileType typescript setlocal shiftwidth=4 tabstop=4
 autocmd FileType php setlocal shiftwidth=4 tabstop=4
 "=====================
 
+" OSM files as XML
+autocmd BufNewFile,BufRead *.osm set syntax=xml
+autocmd BufNewFile,BufRead *.osc set syntax=xml
+" ==================
+
 let g:netrw_liststyle = 3
