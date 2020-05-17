@@ -68,13 +68,13 @@ if has("nvim")
   " For Denite features
   Plug 'Shougo/denite.nvim'
 
-  " Java
-  Plug 'artur-shaik/vim-javacomplete2'
-  autocmd FileType java setlocal omnifunc=javacomplete#Complete
-  autocmd BufWritePost *.java
-      \ if filereadable('tags') |
-      \   call system('ctags -a '.expand('%')) |
-      \ endif
+  " " Java
+  " Plug 'artur-shaik/vim-javacomplete2'
+  " autocmd FileType java setlocal omnifunc=javacomplete#Complete
+  " autocmd BufWritePost *.java
+  "     \ if filereadable('tags') |
+  "     \   call system('ctags -a '.expand('%')) |
+  "     \ endif
 
 endif
 
