@@ -23,8 +23,6 @@ let isFzfPresent = executable('fzf')
 
 Plug 'nanotech/jellybeans.vim'
 Plug 'flazz/vim-colorschemes'
-Plug 'vale1410/vim-minizinc'
-Plug 'ngmy/vim-rubocop'
 Plug 'tomtom/tcomment_vim'
 Plug 'henrik/vim-indexed-search'
 Plug 'vim-airline/vim-airline'
@@ -41,9 +39,13 @@ Plug 'tpope/vim-repeat'
 Plug 'wincent/loupe'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'danro/rename.vim'
+Plug 'b4winckler/vim-angry'
 Plug 'itchyny/vim-haskell-indent'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/goyo.vim'
+Plug 'machakann/vim-highlightedyank'
+let g:highlightedyank_highlight_duration = 200
+
 if isFzfPresent
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
@@ -55,11 +57,16 @@ else
   Plug 'ctrlpvim/ctrlp.vim'
   let g:ctrlp_custom_ignore = 'node_modules\|git'
 endif
-Plug 'b4winckler/vim-angry'
 Plug 'vim-syntastic/syntastic'
 
-Plug 'udalov/kotlin-vim'
+" Old plugins I might need at some point
+" Plug 'udalov/kotlin-vim'
+" Plug 'vale1410/vim-minizinc'
+" Plug 'ngmy/vim-rubocop'
 
+Plug 'maxmellon/vim-jsx-pretty'
+
+" Completion
 Plug 'HerringtonDarkholme/yats.vim'
 if has("nvim")
   Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
