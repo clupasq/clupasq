@@ -405,8 +405,3 @@ autocmd BufNewFile,BufRead *.osc set syntax=xml
 " ==================
 
 let g:netrw_liststyle = 3
-
-" Get transparent background
-hi! Normal ctermbg=NONE guibg=NONE
-hi! NonText ctermbg=NONE guibg=NONE
-
