@@ -9,7 +9,8 @@ export PATH="$PATH:$HOME/.bin_work" # Add bin directory to PATH
 export KONSOLE_PROFILE_NAME=ktest
 
 # Customization for bash-it powerline-multiline theme
+# "node" may be added here to show node version
 export POWERLINE_LEFT_PROMPT="hostname wd scm"
-export POWERLINE_RIGHT_PROMPT="python_venv node in_vim clock battery user_info"
+export POWERLINE_RIGHT_PROMPT="python_venv in_vim clock battery user_info"
 # Force to choose a color other than 0
 [[ $HOST_THEME_PROMPT_COLOR -eq 0 ]] && export HOST_THEME_PROMPT_COLOR=213
