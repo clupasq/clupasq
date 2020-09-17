@@ -12,7 +12,5 @@ export KONSOLE_PROFILE_NAME=ktest
 # "node" may be added here to show node version
 export POWERLINE_LEFT_PROMPT="hostname wd scm"
 export POWERLINE_RIGHT_PROMPT="duration python_venv in_vim clock battery user_info"
-export POWERLINE_DURATION_THRESHOLD=2
-
 # Force to choose a color other than 0
 [[ $HOST_THEME_PROMPT_COLOR -eq 0 ]] && export HOST_THEME_PROMPT_COLOR=213

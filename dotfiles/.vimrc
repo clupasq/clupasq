@@ -4,7 +4,6 @@ set t_Co=256                                               " 256 colors...
 
 syntax enable                                              " Turn on syntax highlighting.
 
-
 " vundle init
 set nocompatible                                           " be iMproved, required
 filetype off                                               " required
@@ -18,8 +17,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-
-let isFzfPresent = executable('fzf')
 
 Plug 'nanotech/jellybeans.vim'
 Plug 'flazz/vim-colorschemes'
@@ -46,6 +43,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'machakann/vim-highlightedyank'
 let g:highlightedyank_highlight_duration = 200
 
+let isFzfPresent = executable('fzf')
 if isFzfPresent
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
@@ -59,34 +57,184 @@ else
 endif
 Plug 'vim-syntastic/syntastic'
 
-" Old plugins I might need at some point
-" Plug 'udalov/kotlin-vim'
-" Plug 'vale1410/vim-minizinc'
-" Plug 'ngmy/vim-rubocop'
-
 Plug 'maxmellon/vim-jsx-pretty'
 
 " Completion
-Plug 'HerringtonDarkholme/yats.vim'
-if has("nvim")
-  Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
-  " For async completion
-  Plug 'Shougo/deoplete.nvim'
-  " For Denite features
-  Plug 'Shougo/denite.nvim'
+" Plug 'HerringtonDarkholme/yats.vim'
+let isNodeInstalled = executable('node')
+if isNodeInstalled && has('nvim')
+  Plug 'honza/vim-snippets'
 
-  " " Java
-  " Plug 'artur-shaik/vim-javacomplete2'
-  " autocmd FileType java setlocal omnifunc=javacomplete#Complete
-  " autocmd BufWritePost *.java
-  "     \ if filereadable('tags') |
-  "     \   call system('ctags -a '.expand('%')) |
-  "     \ endif
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+  " coc-snippets tab completion
+  inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+  function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+  let g:coc_snippet_next = '<tab>'
+  " Use <C-j> for jump to next placeholder, it's default of coc.nvim
+  let g:coc_snippet_next = '<c-j>'
+  " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+  let g:coc_snippet_prev = '<c-k>'
+  " Some servers have issues with backup files, see #649.
+  set nobackup
+  set nowritebackup
+
+  " Give more space for displaying messages.
+  " set cmdheight=2
+
+  " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+  " delays and poor user experience.
+  set updatetime=300
+
+  " Don't pass messages to |ins-completion-menu|.
+  set shortmess+=c
+
+  " Always show the signcolumn, otherwise it would shift the text each time
+  " diagnostics appear/become resolved.
+  if has("patch-8.1.1564")
+    " Recently vim can merge signcolumn and number column into one
+    set signcolumn=number
+  else
+    set signcolumn=yes
+  endif
+
+  " Use tab for trigger completion with characters ahead and navigate.
+  " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+  " other plugin before putting this into your config.
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+
+  " Use <c-space> to trigger completion.
+  if has('nvim')
+    inoremap <silent><expr> <c-space> coc#refresh()
+  else
+    inoremap <silent><expr> <c-@> coc#refresh()
+  endif
+
+  " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+  " position. Coc only does snippet and additional edit on confirm.
+  " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+  if exists('*complete_info')
+    inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+  else
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  endif
+
+  " Use `[g` and `]g` to navigate diagnostics
+  " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+  nmap <silent> [g <Plug>(coc-diagnostic-prev)
+  nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+  " GoTo code navigation.
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+
+  " Use K to show documentation in preview window.
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+  function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+
+  " Highlight the symbol and its references when holding the cursor.
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+
+  " Symbol renaming.
+  nmap <leader>rn <Plug>(coc-rename)
+
+  " Formatting selected code.
+  " xmap <leader>f  <Plug>(coc-format-selected)
+  " nmap <leader>f  <Plug>(coc-format-selected)
+
+  augroup mygroup
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder.
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  augroup end
+
+  " Applying codeAction to the selected region.
+  " Example: `<leader>aap` for current paragraph
+  xmap <leader>a  <Plug>(coc-codeaction-selected)
+  nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+  " Remap keys for applying codeAction to the current buffer.
+  nmap <leader>ac  <Plug>(coc-codeaction)
+  " Apply AutoFix to problem on the current line.
+  nmap <leader>qf  <Plug>(coc-fix-current)
+
+  " Map function and class text objects
+  " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+  xmap if <Plug>(coc-funcobj-i)
+  omap if <Plug>(coc-funcobj-i)
+  xmap af <Plug>(coc-funcobj-a)
+  omap af <Plug>(coc-funcobj-a)
+  xmap ic <Plug>(coc-classobj-i)
+  omap ic <Plug>(coc-classobj-i)
+  xmap ac <Plug>(coc-classobj-a)
+  omap ac <Plug>(coc-classobj-a)
+
+  " Use CTRL-S for selections ranges.
+  " Requires 'textDocument/selectionRange' support of language server.
+  nmap <silent> <C-s> <Plug>(coc-range-select)
+  xmap <silent> <C-s> <Plug>(coc-range-select)
+
+  " Add `:Format` command to format current buffer.
+  command! -nargs=0 Format :call CocAction('format')
+
+  " Add `:Fold` command to fold current buffer.
+  command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+  " Add `:OR` command for organize imports of the current buffer.
+  command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+  " Add (Neo)Vim's native statusline support.
+  " NOTE: Please see `:h coc-status` for integrations with external plugins that
+  " provide custom statusline: lightline.vim, vim-airline.
+  set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+  " Mappings for CoCList
+  " Show all diagnostics.
+  nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+  " Manage extensions.
+  nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+  " Show commands.
+  nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+  " Find symbol of current document.
+  nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+  " Search workspace symbols.
+  nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+  " Do default action for next item.
+  nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+  " Do default action for previous item.
+  nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+  nnoremap <silent><nowait> <space>i  :<C-u>CocFix<CR>
+  " Resume latest coc list.
+  nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 endif
-
-" Enable deoplete at startup
-let g:deoplete#enable_at_startup = 1
 
 """" VIM - align """"""""""""""""""
 Plug 'junegunn/vim-easy-align'
@@ -96,19 +244,18 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 """""""""""""""""""""""""""""""""""
 
-
 """" FZF send to quickfix """"""""""""""""""""
 function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-  cc
+    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+    copen
+    cc
 endfunction
 
 let g:fzf_action = {
-      \ 'ctrl-q': function('s:build_quickfix_list'),
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'ctrl-v': 'vsplit' }
+            \ 'ctrl-q': function('s:build_quickfix_list'),
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-v': 'vsplit' }
 
 function! g:FZFGitOnly()
     let $FZF_DEFAULT_COMMAND=' (git ls-tree -r --name-only HEAD || find . -path "*/\.*" -prune -o -type f -print -o -type l -print | sed s/^..//) 2> /dev/null'
@@ -118,19 +265,6 @@ function! g:FZFAllFiles()
     let $FZF_DEFAULT_COMMAND="command find -L \$dir -type f 2> /dev/null | sed '1d; s#^\./##'"
 endfunction
 
-"""""""""""""""""""""""""""""""""""
-
-"""" ULTISNIPS """"""""""""""""""""
-" Track the engine.
-Plug 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 """""""""""""""""""""""""""""""""""
 
 call plug#end()
@@ -176,8 +310,7 @@ if exists('$SUDO_USER')
   set nobackup                                             " don't create root-owned files
   set nowritebackup                                        " don't create root-owned files
 else
-  set backupdir=~/local/.vim/tmp/backup
-  set backupdir+=~/.vim/tmp/backup                         " keep backup files out of the way
+  set backupdir=~/.vim/tmp/backup                         " keep backup files out of the way
   set backupdir+=.
 endif
 
@@ -186,8 +319,7 @@ set cursorline                                             " highlight current l
 if exists('$SUDO_USER')
   set noswapfile                                           " don't create root-owned files
 else
-  set directory=~/local/.vim/tmp/swap//
-  set directory+=~/.vim/tmp/swap//                         " keep swap files out of the way
+  set directory=~/.vim/tmp/swap//                         " keep swap files out of the way
   set directory+=.
 endif
 
@@ -195,8 +327,7 @@ if has('persistent_undo')
   if exists('$SUDO_USER')
     set noundofile                                         " don't create root-owned files
   else
-    set undodir=~/local/.vim/tmp/undo
-    set undodir+=~/.vim/tmp/undo                           " keep undo files out of the way
+    set undodir=~/.vim/tmp/undo                           " keep undo files out of the way
     set undodir+=.
     set undofile                                           " actually use undo files
   endif
@@ -379,20 +510,8 @@ nnoremap <Leader>sp myvip:VtrSendLinesToRunner<CR>`y
 " Python things
 let g:VtrStripLeadingWhitespace = 0
 " let g:VtrClearEmptyLines = 0
-" let g:VtrAppendNewline = 1
+let g:VtrAppendNewline = 1
 let g:pymode_python = 'python3'
-
-
-" TypeScript bindings
-autocmd FileType typescript nnoremap <buffer> <Leader>r :TSRename<cr>
-autocmd FileType typescript nnoremap <buffer> <Leader>i :TSGetCodeFix<cr>
-autocmd FileType typescript nnoremap <buffer> <Leader>x :TSGetErrorFull<cr>
-autocmd FileType typescript nnoremap <buffer> <Leader>t :TSType<cr>
-autocmd FileType typescript nnoremap <buffer> <Leader>d :TSDoc<cr>
-autocmd FileType typescript nnoremap <buffer> <c-]> :TSDef<cr>
-autocmd FileType typescript nnoremap <buffer> <c-^> :TSRefs<cr>
-
-autocmd FileType typescript setlocal foldmethod=syntax
 
 " still useful while not in develop's version of .editorconfig
 autocmd FileType typescript setlocal shiftwidth=4 tabstop=4
