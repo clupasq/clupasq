@@ -73,7 +73,7 @@ function createDotfileLinks {
 
 function linkToBinDir {
   src="$source_dir/bin"
-  dest="$HOME/.bin_clupasq"
+  dest="$HOME/.bin_wolf"
   if [ ! -d "$dest" ] && [ ! -h "$dest" ]; then
     ln -s "$src" "$dest"
     echo "Link to bin directory created."

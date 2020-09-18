@@ -4,7 +4,7 @@ NAME=clangtest
 FILENAME=${1-$HOME/test.c}
 OUTFILENAME=$(mktemp)
 
-EDITOR_COMMAND=${MYEDITOR-"vim"}
+EDITOR_COMMAND=${MYEDITOR-"vi"}
 
 if tmux has-session -t $NAME 2> /dev/null; then
   # session already exists; connect to it
