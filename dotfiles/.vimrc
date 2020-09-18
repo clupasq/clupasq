@@ -474,10 +474,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" unset K (manual lookup)
-nnoremap K <nop>
-
-
 " Repurpose cursor keys for use with the quickfix window
 nnoremap <silent> <Up> :cprevious<CR>
 nnoremap <silent> <Down> :cnext<CR>
