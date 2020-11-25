@@ -67,6 +67,8 @@ if isNodeInstalled && has('nvim')
 
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+  Plug 'leafgarland/typescript-vim'
+
   " coc-snippets tab completion
   inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
