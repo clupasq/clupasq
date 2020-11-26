@@ -517,8 +517,10 @@ autocmd FileType php setlocal shiftwidth=4 tabstop=4
 "=====================
 
 " OSM files as XML
-autocmd BufNewFile,BufRead *.osm set syntax=xml
-autocmd BufNewFile,BufRead *.osc set syntax=xml
+autocmd BufNewFile,BufRead *.osm set filetype=xml
+autocmd BufNewFile,BufRead *.osc set filetype=xml
+" GEOJSON files as JSON
+autocmd BufNewFile,BufRead *.geojson set filetype=json
 " ==================
 
 let g:netrw_liststyle = 3
