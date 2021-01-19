@@ -55,7 +55,7 @@ else
   Plug 'ctrlpvim/ctrlp.vim'
   let g:ctrlp_custom_ignore = 'node_modules\|git'
 endif
-Plug 'vim-syntastic/syntastic'
+" Plug 'vim-syntastic/syntastic'
 
 Plug 'maxmellon/vim-jsx-pretty'
 
