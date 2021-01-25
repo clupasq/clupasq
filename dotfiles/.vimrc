@@ -519,4 +519,11 @@ autocmd BufNewFile,BufRead *.osm set syntax=xml
 autocmd BufNewFile,BufRead *.osc set syntax=xml
 " ==================
 
+" Treat .tsx files as typescript
+augroup SyntaxSettings
+    autocmd!
+    autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+augroup END
+" ==============================
+
 let g:netrw_liststyle = 3
