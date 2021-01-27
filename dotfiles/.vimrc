@@ -66,7 +66,11 @@ if isNodeInstalled && has('nvim')
 
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+  Plug 'pangloss/vim-javascript'
   Plug 'leafgarland/typescript-vim'
+  Plug 'peitalin/vim-jsx-typescript'
+  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+  Plug 'jparise/vim-graphql'
 
   " coc-snippets tab completion
   inoremap <silent><expr> <TAB>
