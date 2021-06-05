@@ -12,11 +12,10 @@ export KONSOLE_PROFILE_NAME=ktest
 export POWERLINE_LEFT_PROMPT="hostname wd scm"
 export POWERLINE_RIGHT_PROMPT="duration python_venv in_vim clock battery user_info"
 export BASH_IT_COMMAND_DURATION=true
-export COMMAND_DURATION_ICON=""
-export POWERLINE_COMMAND_DURATION_COLOR="196"
+export COMMAND_DURATION_ICON="⌛"
 
 # In .bashrc, add the following after sourcing bash-it:
-#   export COMMAND_DURATION_ICON=""
+#   export COMMAND_DURATION_ICON="⌛"
 #   export HOST_THEME_PROMPT_COLOR=<color for this machine>
 
 # Force to choose a color other than 0
