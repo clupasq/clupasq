@@ -182,11 +182,11 @@ if isNodeInstalled && has('nvim')
 
   " Applying codeAction to the selected region.
   " Example: `<leader>aap` for current paragraph
-  xmap <leader>a  <Plug>(coc-codeaction-selected)
-  nmap <leader>a  <Plug>(coc-codeaction-selected)
+  xmap <leader>x  <Plug>(coc-codeaction-selected)
+  nmap <leader>x  <Plug>(coc-codeaction-selected)
 
   " Remap keys for applying codeAction to the current buffer.
-  nmap <leader>ac  <Plug>(coc-codeaction)
+  nmap <leader>a  <Plug>(coc-codeaction)
   " Apply AutoFix to problem on the current line.
   nmap <leader>qf  <Plug>(coc-fix-current)
 
@@ -222,12 +222,12 @@ if isNodeInstalled && has('nvim')
 
   " Mappings for CoCList
   " Show all diagnostics.
-  nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-  " Manage extensions.
-  nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-  " Show commands.
-  nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-  " Find symbol of current document.
+  nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<cr>
+  " " Manage extensions.
+  " nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+  " " Show commands.
+  " nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+  " " Find symbol of current document.
   nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
   " Search workspace symbols.
   nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
@@ -237,7 +237,11 @@ if isNodeInstalled && has('nvim')
   nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
   nnoremap <silent><nowait> <space>i  :<C-u>CocFix<CR>
   " Resume latest coc list.
-  nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+  " nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+  " Scroll in COC popups
+  nnoremap <expr><C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <expr><C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
 endif
 
