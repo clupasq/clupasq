@@ -41,6 +41,7 @@ Plug 'itchyny/vim-haskell-indent'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/goyo.vim'
 Plug 'machakann/vim-highlightedyank'
+Plug 'Olical/vim-expand'
 let g:highlightedyank_highlight_duration = 200
 
 let isFzfPresent = executable('fzf')
