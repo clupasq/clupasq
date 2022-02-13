@@ -425,6 +425,9 @@ set lazyredraw                                             " don't bother updati
 try
   " colorscheme Atelier_EstuaryDark
   colorscheme jellybeans
+  " Transparency in text and non-text background
+  hi Normal guibg=NONE ctermbg=NONE
+  hi NonText guibg=NONE ctermbg=NONE
 catch /^Vim\%((\a\+)\)\=:E185/
   " deal with it
 endtry
