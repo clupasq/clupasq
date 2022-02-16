@@ -24,8 +24,7 @@ Plug 'tomtom/tcomment_vim'
 Plug 'henrik/vim-indexed-search'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-let g:airline_theme="base16_ocean"
-"Plug 'Valloric/YouCompleteMe'
+let g:airline_theme="supernova"
 Plug 'mattn/emmet-vim'
 Plug 'bogado/file-line'
 Plug 'bronson/vim-trailing-whitespace'
@@ -422,12 +421,20 @@ set lazyredraw                                             " don't bother updati
 " hybrid-light
 " summerfruit256
 
+" function! g:FZFAllFiles()
+"     let $FZF_DEFAULT_COMMAND="command find -L \$dir -type f 2> /dev/null | sed '1d; s#^\./##'"
+" endfunction
+
+function! g:MakeBackgroundTransparent()
+  hi Normal guibg=NONE ctermbg=NONE
+  hi NonText guibg=NONE ctermbg=NONE
+endfunction
+
 try
   " colorscheme Atelier_EstuaryDark
   colorscheme jellybeans
   " Transparency in text and non-text background
-  hi Normal guibg=NONE ctermbg=NONE
-  hi NonText guibg=NONE ctermbg=NONE
+  call MakeBackgroundTransparent()
 catch /^Vim\%((\a\+)\)\=:E185/
   " deal with it
 endtry
@@ -436,23 +443,6 @@ if filereadable(".vimrc.local")
   source .vimrc.local
 endif
 
-
-" syntactic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-"
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_typescript_checkers = ['tslint']
-
-let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': [],
-                           \ 'passive_filetypes': ['java'] }
 
 " ========
 " MAPPINGS
