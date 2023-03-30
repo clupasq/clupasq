@@ -257,6 +257,10 @@ endfunction
 
 """""""""""""""""""""""""""""""""""
 
+if !empty($USE_COPILOT)
+    Plug 'github/copilot.vim'
+endif
+
 call plug#end()
 
 filetype plugin indent on
