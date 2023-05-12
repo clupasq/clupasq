@@ -257,6 +257,9 @@ endfunction
 
 """""""""""""""""""""""""""""""""""
 
+Plug 'dense-analysis/ale'
+let b:ale_linters = ['eslint']
+
 if !empty($USE_COPILOT)
     Plug 'github/copilot.vim'
 endif
