@@ -1,6 +1,14 @@
 # run this file by adding the following line to your .bashrc:
 # source $HOME/.bashrc_clupasq
 
+function supertime {
+    \time --format="User time: %U\nSystem time: %S\nElapsed time: %e\nCPU percentage: %P\nMaximum resident set size: %M\nAverage resident set size: %t\nMajor (requiring I/O) page faults: %F\nMinor (reclaiming a frame) page faults: %R\nVoluntary context switches: %w\nInvoluntary context switches: %c\nFile system inputs: %I\nFile system outputs: %O\nSocket messages sent: %s\nSocket messages received: %r\nSignals delivered: %k\nPage size (bytes): %Z\nExit status: %x\nCommand line: %C\n" $1
+}
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_COMMAND=' (git ls-tree -r --name-only HEAD || find . -path "*/\.*" -prune -o -type f -print -o -type l -print | sed s/^..//) 2> /dev/null'
+
+
 export PATH="$PATH:$HOME/.bin_wolf" # Add bin directory to PATH
 export PATH="$PATH:$HOME/.bin_work" # Add bin directory to PATH
 
