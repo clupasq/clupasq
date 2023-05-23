@@ -2,7 +2,7 @@
 # source $HOME/.bashrc_clupasq
 
 function supertime {
-    \time --format="User time: %U\nSystem time: %S\nElapsed time: %e\nCPU percentage: %P\nMaximum resident set size: %M\nAverage resident set size: %t\nMajor (requiring I/O) page faults: %F\nMinor (reclaiming a frame) page faults: %R\nVoluntary context switches: %w\nInvoluntary context switches: %c\nFile system inputs: %I\nFile system outputs: %O\nSocket messages sent: %s\nSocket messages received: %r\nSignals delivered: %k\nPage size (bytes): %Z\nExit status: %x\nCommand line: %C\n" $1
+    \time --format="User time: %U\nSystem time: %S\nElapsed time: %e\nCPU percentage: %P\nMaximum resident set size: %M\nAverage resident set size: %t\nMajor (requiring I/O) page faults: %F\nMinor (reclaiming a frame) page faults: %R\nVoluntary context switches: %w\nInvoluntary context switches: %c\nFile system inputs: %I\nFile system outputs: %O\nSocket messages sent: %s\nSocket messages received: %r\nSignals delivered: %k\nPage size (bytes): %Z\nExit status: %x\nCommand line: %C\n" $@
 }
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
