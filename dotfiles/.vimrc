@@ -260,6 +260,9 @@ endfunction
 Plug 'dense-analysis/ale'
 let b:ale_linters = ['eslint']
 
+" post install (yarn install | npm install) then load plugin only for editing supported files
+Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+
 if !empty($USE_COPILOT)
     Plug 'github/copilot.vim'
 endif
@@ -510,6 +513,10 @@ autocmd BufNewFile,BufRead *.osm set filetype=xml
 autocmd BufNewFile,BufRead *.osc set filetype=xml
 " GEOJSON files as JSON
 autocmd BufNewFile,BufRead *.geojson set filetype=json
+" Jenkinsfile is written in Groovy
+autocmd BufNewFile,BufRead Jenkinsfile set syntax=groovy
 " ==================
 
 let g:netrw_liststyle = 3
+
+nnoremap <Leader>d vi]:!python ~/sort-validator-errors.py<CR>
