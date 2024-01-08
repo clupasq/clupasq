@@ -1,8 +1,8 @@
 #!/bin/bash
 
 NAME=typescripttest
-FILENAME=${1-$HOME/test.ts}
-COMPILED=${FILENAME}.js
+FILENAME=${1-$HOME/test_ts.ts}
+COMPILED=${FILENAME/%.ts/.js}
 
 EDITOR_COMMAND=${MYEDITOR-"vi"}
 
@@ -20,7 +20,7 @@ tmux new-session -s $NAME -d
 tmux send-keys -t $NAME "$EDITOR_COMMAND $FILENAME" C-m
 
 tmux split-window -h -t $NAME
-WATCH_COMMAND="while true; do inotifywait -e MODIFY $FILENAME; clear; tsc $FILENAME --outFile $COMPILED; node $COMPILED; done"
+WATCH_COMMAND="while true; do inotifywait -e MODIFY $FILENAME; clear; tsc $FILENAME; node $COMPILED; done"
 tmux send-keys -t $NAME "$WATCH_COMMAND" C-m
 
 # go back to first pane
