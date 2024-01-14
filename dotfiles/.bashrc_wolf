@@ -28,3 +28,5 @@ export COMMAND_DURATION_ICON="⌛"
 
 # Force to choose a color other than 0
 # [[ $HOST_THEME_PROMPT_COLOR -eq 0 ]] && export HOST_THEME_PROMPT_COLOR=213
+
+alias qr='qrencode -m2 -t utf8'
