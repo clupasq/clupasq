@@ -19,3 +19,5 @@ export PATH="$PATH:$HOME/.bin_work" # Add bin directory to PATH
 # TODO: remove if migrating to foot/alacritty
 export KONSOLE_PROFILE_NAME=ktest
 
+# Enable liquidprompt, if installed
+[ -f ~/.liquidprompt/liquidprompt ] && source ~/.liquidprompt/liquidprompt
