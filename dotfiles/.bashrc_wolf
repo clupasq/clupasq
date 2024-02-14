@@ -20,4 +20,7 @@ export PATH="$PATH:$HOME/.bin_work" # Add bin directory to PATH
 export KONSOLE_PROFILE_NAME=ktest
 
 # Enable liquidprompt, if installed
-[ -f ~/.liquidprompt/liquidprompt ] && source ~/.liquidprompt/liquidprompt
+if [ -f ~/.liquidprompt/liquidprompt ]; then
+    export LP_ENABLE_SSH_COLORS=1
+    source ~/.liquidprompt/liquidprompt
+fi
