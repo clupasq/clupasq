@@ -23,4 +23,5 @@ export KONSOLE_PROFILE_NAME=ktest
 if [ -f ~/.liquidprompt/liquidprompt ]; then
     export LP_ENABLE_SSH_COLORS=1
     source ~/.liquidprompt/liquidprompt
+    LP_MARK_PREFIX=$'\n'
 fi
