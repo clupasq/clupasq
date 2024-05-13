@@ -518,5 +518,3 @@ autocmd BufNewFile,BufRead Jenkinsfile set syntax=groovy
 " ==================
 
 let g:netrw_liststyle = 3
-
-nnoremap <Leader>d vi]:!python ~/sort-validator-errors.py<CR>
