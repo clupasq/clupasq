@@ -5,6 +5,15 @@ FILENAME=${1-$HOME/test.py}
 
 EDITOR_COMMAND=${MYEDITOR-"vi"}
 
+if command -v python &> /dev/null; then
+    PYTHON_CMD="python"
+elif command -v python3 &> /dev/null; then
+    PYTHON_CMD="python3"
+else
+    echo "❌ Error: Python is not installed."
+    exit 1
+fi
+
 if tmux has-session -t $NAME 2> /dev/null; then
   # session already exists; connect to it
   tmux attach -t $NAME
@@ -19,7 +28,7 @@ tmux new-session -s $NAME -d
 tmux send-keys -t $NAME "$EDITOR_COMMAND $FILENAME" C-m
 
 tmux split-window -h -t $NAME
-WATCH_COMMAND="while true; do inotifywait -e MODIFY $FILENAME; clear; time python $FILENAME; done"
+WATCH_COMMAND="while true; do inotifywait -e MODIFY $FILENAME; clear; time $PYTHON_CMD $FILENAME; done"
 tmux send-keys -t $NAME "$WATCH_COMMAND" C-m
 
 # go back to first pane
