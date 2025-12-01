@@ -20,7 +20,7 @@ tmux new-session -s $NAME -d
 tmux send-keys -t $NAME "$EDITOR_COMMAND $FILENAME" C-m
 
 tmux split-window -h -t $NAME
-WATCH_COMMAND="while true; do inotifywait -e MODIFY $FILENAME; clear; time (g++ $FILENAME -Wall -Wextra -pedantic -std=c++20 -o $OUTFILENAME && $OUTFILENAME); done"
+WATCH_COMMAND="while true; do inotifywait -e MODIFY $FILENAME; clear; g++ $FILENAME -Wall -Wextra -pedantic -std=c++20 -o $OUTFILENAME && time $OUTFILENAME; done"
 tmux send-keys -t $NAME "$WATCH_COMMAND" C-m
 
 # go back to first pane
