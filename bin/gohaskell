@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 NAME=haskelltest
 FILENAME=${1-$HOME/test.hs}

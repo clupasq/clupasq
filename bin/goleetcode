@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 NAME=leetcodez
 FILENAME=${1-./test.py}

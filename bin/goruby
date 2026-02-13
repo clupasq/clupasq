@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 NAME=rubytest
 FILENAME=${1-$HOME/test.rb}

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 NAME=typescripttest
 FILENAME=${1-$HOME/test_ts.ts}

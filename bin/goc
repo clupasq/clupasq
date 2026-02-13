@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 NAME=clangtest
 FILENAME=${1-$HOME/test.c}
