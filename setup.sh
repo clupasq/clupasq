@@ -50,25 +50,38 @@ source_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 function createDotfileLinks {
   dotfiles_dir="$source_dir/dotfiles"
 
-  shopt -s dotglob # also iterate hidden files with glob
-  for f in "$dotfiles_dir"/*
-  do
-    f="$(basename $f)"
+  # Top-level files (e.g. .zshrc, .vimrc)
+  shopt -s dotglob
+  for abs_src in "$dotfiles_dir"/*; do
+    [ -f "$abs_src" ] || continue  # skip directories
+    f="$(basename "$abs_src")"
     dest="$HOME/$f"
-    if [ ! -f "$dest" ] && [ ! -h "$dest" ]; then
-      ln -s "$dotfiles_dir/$f" "$dest"
-      echo "$f - linked OK"
-    else
-      if [[ $OVERWRITE == "Y" ]]; then
-        rm -rf "$dest"
-        ln -s "$dotfiles_dir/$f" "$dest"
-        echo "$f - overwritten!"
-      else
-        echo "$f - already present (not overwritten; use -o to overwrite)"
-      fi
-    fi
+    linkFile "$abs_src" "$dest" "$f"
   done
   shopt -u dotglob
+
+  # Directories under .config/ (e.g. .config/nvim -> ~/.config/nvim)
+  mkdir -p "$HOME/.config"
+  for abs_src in "$dotfiles_dir/.config"/*/; do
+    [ -d "$abs_src" ] || continue
+    f="$(basename "$abs_src")"
+    dest="$HOME/.config/$f"
+    linkFile "$abs_src" "$dest" ".config/$f"
+  done
+}
+
+function linkFile {
+  local abs_src="$1" dest="$2" label="$3"
+  if [ ! -e "$dest" ] && [ ! -h "$dest" ]; then
+    ln -s "$abs_src" "$dest"
+    echo "$label - linked OK"
+  elif [[ $OVERWRITE == "Y" ]]; then
+    rm -rf "$dest"
+    ln -s "$abs_src" "$dest"
+    echo "$label - overwritten!"
+  else
+    echo "$label - already present (not overwritten; use -o to overwrite)"
+  fi
 }
 
 function linkToBinDir {

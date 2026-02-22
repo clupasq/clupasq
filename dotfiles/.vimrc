@@ -1,12 +1,11 @@
-set nocompatible                                           " Must come first because it changes other options.
+" Must come first because it changes other options.
+set nocompatible
 
-set t_Co=256                                               " 256 colors...
+" 256 colors...
+set t_Co=256
 
-syntax enable                                              " Turn on syntax highlighting.
-
-" vundle init
-set nocompatible                                           " be iMproved, required
-filetype off                                               " required
+" Turn on syntax highlighting.
+syntax enable
 
 let mapleader = " "
 
@@ -24,11 +23,9 @@ Plug 'tomtom/tcomment_vim'
 Plug 'henrik/vim-indexed-search'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-let g:airline_theme="supernova"
 Plug 'mattn/emmet-vim'
 Plug 'bogado/file-line'
 Plug 'bronson/vim-trailing-whitespace'
-let g:VtrUseVtrMaps = 1
 Plug 'christoomey/vim-tmux-runner'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -37,202 +34,67 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'danro/rename.vim'
 Plug 'b4winckler/vim-angry'
 Plug 'itchyny/vim-haskell-indent'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi'
 Plug 'junegunn/goyo.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'Olical/vim-expand'
-let g:highlightedyank_highlight_duration = 200
 
 let isFzfPresent = executable('fzf')
 if isFzfPresent
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
+else
+  Plug 'ctrlpvim/ctrlp.vim'
+endif
+
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+
+"""" VIM - align """"""""""""""""""
+Plug 'junegunn/vim-easy-align'
+"""""""""""""""""""""""""""""""""""
+
+Plug 'dense-analysis/ale'
+
+" post install (yarn install | npm install) then load plugin only for editing supported files
+Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+
+if !empty($USE_COPILOT)
+  Plug 'github/copilot.vim'
+endif
+
+call plug#end()
+
+" ========================
+" PLUGIN SETTINGS
+" ========================
+
+let g:airline_theme = "supernova"
+
+let g:VtrUseVtrMaps = 1
+
+let g:highlightedyank_highlight_duration = 200
+
+let g:ale_linters = {'javascript': ['eslint']}             " Fix: was b:ale_linters (buffer-local, ineffective at startup)
+
+" EasyAlign
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+" CtrlP
+if !isFzfPresent
+  let g:ctrlp_custom_ignore = 'node_modules\|git'
+endif
+
+" FZF
+if isFzfPresent
   nnoremap <c-p> :FZF<cr>
   nnoremap <leader>F :Lines<cr>
   nnoremap <leader>f :BLines<cr>
   nnoremap <leader>b :Buffers<cr>
-else
-  Plug 'ctrlpvim/ctrlp.vim'
-  let g:ctrlp_custom_ignore = 'node_modules\|git'
 endif
-
-Plug 'maxmellon/vim-jsx-pretty'
-
-" Completion
-" Plug 'HerringtonDarkholme/yats.vim'
-let isNodeInstalled = executable('node')
-if isNodeInstalled && has('nvim')
-  Plug 'honza/vim-snippets'
-
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-  Plug 'pangloss/vim-javascript'
-  Plug 'leafgarland/typescript-vim'
-  Plug 'peitalin/vim-jsx-typescript'
-  " Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-  " Plug 'jparise/vim-graphql'
-
-  " Some servers have issues with backup files, see #649.
-  set nobackup
-  set nowritebackup
-
-  " Give more space for displaying messages.
-  " set cmdheight=2
-
-  " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-  " delays and poor user experience.
-  set updatetime=300
-
-  " Don't pass messages to |ins-completion-menu|.
-  set shortmess+=c
-
-  " Always show the signcolumn, otherwise it would shift the text each time
-  " diagnostics appear/become resolved.
-  if has("patch-8.1.1564")
-    " Recently vim can merge signcolumn and number column into one
-    set signcolumn=number
-  else
-    set signcolumn=yes
-  endif
-
-  " Use <c-space> to trigger completion.
-  if has('nvim')
-    inoremap <silent><expr> <c-space> coc#refresh()
-  else
-    inoremap <silent><expr> <c-@> coc#refresh()
-  endif
-
-  " To make <CR> to confirm selection of selected complete item or notify coc.nvim
-  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
-    \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-  " Map <tab> for trigger completion, completion confirm, snippet expand and jump like VSCode: >
-  inoremap <silent><expr> <TAB>
-    \ coc#pum#visible() ? coc#_select_confirm() :
-    \ coc#expandableOrJumpable() ?
-    \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-    \ CheckBackSpace() ? "\<TAB>" :
-    \ coc#refresh()
-
-  function! CheckBackSpace() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-  endfunction
-
-  let g:coc_snippet_next = '<tab>'
-
-  " Use `[g` and `]g` to navigate diagnostics
-  " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-  nmap <silent> [g <Plug>(coc-diagnostic-prev)
-  nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-  " GoTo code navigation.
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> gi <Plug>(coc-implementation)
-  nmap <silent> gr <Plug>(coc-references)
-
-  " Use K to show documentation in preview window.
-  nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-  function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-      execute 'h '.expand('<cword>')
-    else
-      call CocAction('doHover')
-    endif
-  endfunction
-
-  " Highlight the symbol and its references when holding the cursor.
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-
-  " Symbol renaming.
-  nmap <leader>rn <Plug>(coc-rename)
-
-  " Formatting selected code.
-  " xmap <leader>f  <Plug>(coc-format-selected)
-  " nmap <leader>f  <Plug>(coc-format-selected)
-
-  augroup mygroup
-    autocmd!
-    " Setup formatexpr specified filetype(s).
-    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-    " Update signature help on jump placeholder.
-    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-  augroup end
-
-  " Applying codeAction to the selected region.
-  " Example: `<leader>aap` for current paragraph
-  xmap <leader>x  <Plug>(coc-codeaction-selected)
-  nmap <leader>x  <Plug>(coc-codeaction-selected)
-
-  " Remap keys for applying codeAction to the current buffer.
-  nmap <leader>a  <Plug>(coc-codeaction)
-  " Apply AutoFix to problem on the current line.
-  nmap <leader>qf  <Plug>(coc-fix-current)
-
-  " Map function and class text objects
-  " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-  xmap if <Plug>(coc-funcobj-i)
-  omap if <Plug>(coc-funcobj-i)
-  xmap af <Plug>(coc-funcobj-a)
-  omap af <Plug>(coc-funcobj-a)
-  xmap ic <Plug>(coc-classobj-i)
-  omap ic <Plug>(coc-classobj-i)
-  xmap ac <Plug>(coc-classobj-a)
-  omap ac <Plug>(coc-classobj-a)
-
-  " Use CTRL-S for selections ranges.
-  " Requires 'textDocument/selectionRange' support of language server.
-  nmap <silent> <C-s> <Plug>(coc-range-select)
-  xmap <silent> <C-s> <Plug>(coc-range-select)
-
-  " Add `:Format` command to format current buffer.
-  command! -nargs=0 Format :call CocAction('format')
-
-  " Add `:Fold` command to fold current buffer.
-  command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-  " Add `:OR` command for organize imports of the current buffer.
-  command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-  " Add (Neo)Vim's native statusline support.
-  " NOTE: Please see `:h coc-status` for integrations with external plugins that
-  " provide custom statusline: lightline.vim, vim-airline.
-  set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-  " Mappings for CoCList
-  " Show all diagnostics.
-  nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<cr>
-  " " Manage extensions.
-  " nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-  " " Show commands.
-  " nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-  " " Find symbol of current document.
-  nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-  " Search workspace symbols.
-  nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-  " Do default action for next item.
-  nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-  " Do default action for previous item.
-  nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-  nnoremap <silent><nowait> <space>i  :<C-u>CocFix<CR>
-  " Resume latest coc list.
-  " nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-
-  " Scroll in COC popups
-  nnoremap <expr><C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <expr><C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-
-endif
-
-"""" VIM - align """"""""""""""""""
-Plug 'junegunn/vim-easy-align'
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-"""""""""""""""""""""""""""""""""""
 
 """" FZF send to quickfix """"""""""""""""""""
 function! s:build_quickfix_list(lines)
@@ -254,24 +116,22 @@ endfunction
 function! g:FZFAllFiles()
     let $FZF_DEFAULT_COMMAND="command find -L \$dir -type f 2> /dev/null | sed '1d; s#^\./##'"
 endfunction
-
 """""""""""""""""""""""""""""""""""
 
-Plug 'dense-analysis/ale'
-let b:ale_linters = ['eslint']
+" VimTmuxRunner
+let g:VtrStripLeadingWhitespace = 0
+let g:VtrAppendNewline = 1
+let g:pymode_python = 'python3'
 
-" post install (yarn install | npm install) then load plugin only for editing supported files
-Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+" Netrw
+let g:netrw_liststyle = 3
 
-if !empty($USE_COPILOT)
-    Plug 'github/copilot.vim'
-endif
 
-call plug#end()
+" ========================
+" GENERAL SETTINGS
+" ========================
 
 filetype plugin indent on
-
-
 
 set showcmd                                                " Display incomplete commands.
 set showmode                                               " Display the mode you're in.
@@ -295,7 +155,7 @@ set hlsearch                                               " Highlight matches.
 
 set wrap                                                   " Turn on line wrapping.
 set scrolloff=3                                            " Show 3 lines of context around the cursor.
-set sidescrolloff=3                                        " Same as above, but horizontally
+set sidescrolloff=3
 
 set title                                                  " Set the terminal's title
 
@@ -304,13 +164,13 @@ set visualbell                                             " No beeping.
 set fillchars=vert:┃                                       " Nice vertical separators
 
 set foldmethod=indent
-set foldlevelstart=20                                      " No indentation when opening files
+set foldlevelstart=20                                      " No folding when opening files
 
 if exists('$SUDO_USER')
   set nobackup                                             " don't create root-owned files
   set nowritebackup                                        " don't create root-owned files
 else
-  set backupdir=~/.vim/tmp/backup                         " keep backup files out of the way
+  set backupdir=~/.vim/tmp/backup                          " keep backup files out of the way
   set backupdir+=.
 endif
 
@@ -319,7 +179,7 @@ set cursorline                                             " highlight current l
 if exists('$SUDO_USER')
   set noswapfile                                           " don't create root-owned files
 else
-  set directory=~/.vim/tmp/swap//                         " keep swap files out of the way
+  set directory=~/.vim/tmp/swap//                          " keep swap files out of the way
   set directory+=.
 endif
 
@@ -327,7 +187,7 @@ if has('persistent_undo')
   if exists('$SUDO_USER')
     set noundofile                                         " don't create root-owned files
   else
-    set undodir=~/.vim/tmp/undo                           " keep undo files out of the way
+    set undodir=~/.vim/tmp/undo                            " keep undo files out of the way
     set undodir+=.
     set undofile                                           " actually use undo files
   endif
@@ -340,7 +200,7 @@ if has('viminfo')
     if isdirectory('~/local/.vim/tmp')
       set viminfo+=n~/local/.vim/tmp/viminfo
     else
-      set viminfo+=n~/.vim/tmp/viminfo " override ~/.viminfo default
+      set viminfo+=n~/.vim/tmp/viminfo                     " override ~/.viminfo default
     endif
 
     if !empty(glob('~/.vim/tmp/viminfo'))
@@ -356,7 +216,7 @@ if has('mksession')
     set viewdir=~/local/.vim/tmp/view
   else
     set viewdir=~/.vim/tmp/view                            " override ~/.vim/view default
-  endif                                                    " save/restore just these (with `:{mk,load}view`)
+  endif
 endif
 
 set mouse=a                                                " Use the mouse if available for scaling wins, activating tabs.
@@ -364,7 +224,7 @@ set mouse=a                                                " Use the mouse if av
 set list lcs=trail:·,tab:»·
 
 if has('linebreak')
-  let &showbreak='╰ '                                      " ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS (U+2937, UTF-8: E2 A4 B7)
+  let &showbreak='╰ '
 endif
 
 set shortmess+=A                                           " ignore annoying swapfile messages
@@ -385,36 +245,8 @@ set shiftround                                             " always indent by mu
 set expandtab                                              " Use spaces instead of tabs
 
 set laststatus=2                                           " Show the status line all the time
-" Useful status information at bottom of screen
 
 set lazyredraw                                             " don't bother updating screen during macro playback
-
-" Dark
-" ----
-" jellybeans
-" lucius
-" wombat256dave
-" seoul256
-" iceberg
-" darth
-" lizard256
-"
-"
-" Very Dark
-" ---------
-" hybrid
-" sorcerer
-" spacegray
-"
-"
-" Light
-" -----
-" hybrid-light
-" summerfruit256
-
-" function! g:FZFAllFiles()
-"     let $FZF_DEFAULT_COMMAND="command find -L \$dir -type f 2> /dev/null | sed '1d; s#^\./##'"
-" endfunction
 
 function! g:MakeBackgroundTransparent()
   hi Normal guibg=NONE ctermbg=NONE
@@ -422,9 +254,7 @@ function! g:MakeBackgroundTransparent()
 endfunction
 
 try
-  " colorscheme Atelier_EstuaryDark
   colorscheme jellybeans
-  " Transparency in text and non-text background
   call MakeBackgroundTransparent()
 catch /^Vim\%((\a\+)\)\=:E185/
   " deal with it
@@ -435,13 +265,12 @@ if filereadable(".vimrc.local")
 endif
 
 
-" ========
+" ========================
 " MAPPINGS
-" ========
-
+" ========================
 
 " VISUAL
-" ========
+" ------
 " use ctrl+direction to switch windows
 xnoremap <C-h> <C-w>h
 xnoremap <C-j> <C-w>j
@@ -449,13 +278,13 @@ xnoremap <C-k> <C-w>k
 xnoremap <C-l> <C-w>l
 
 " COMMAND
-" ========
+" -------
 " commandline style go to beginning/end
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
 " NORMAL
-" ========
+" ------
 " avoid pressing Q to go to Ex mode
 nnoremap Q q
 
@@ -474,47 +303,39 @@ nnoremap <silent> <Down> :cnext<CR>
 nnoremap <silent> <Left> :cpfile<CR>
 nnoremap <silent> <Right> :cnfile<CR>
 
-" Use - to open the folder the current file is in
-"nnoremap <silent> - :silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
-
 " Store relative line number jumps in the jumplist if they exceed a threshold.
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
 
 " LEADER
-" ========
+" ------
 " use leader leader to switch between file and alt file
 nnoremap <Leader><Leader> <C-^>
 
-" <Leader>p -- Show the path of the current file (mnemonic: path; useful when
-" you have a lot of splits and the status line gets truncated).
+" Show the path of the current file
 nnoremap <Leader>p :echo expand('%')<CR>
 
-" <LocalLeader>e -- Edit file, starting in same directory as current file.
+" Edit file, starting in same directory as current file.
 nnoremap <Leader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
-
 
 " VimTmuxRunner - run current paragraph
 nnoremap <Leader>sp myvip:VtrSendLinesToRunner<CR>`y
 
-" Python things
-let g:VtrStripLeadingWhitespace = 0
-" let g:VtrClearEmptyLines = 0
-let g:VtrAppendNewline = 1
-let g:pymode_python = 'python3'
 
-" still useful while not in develop's version of .editorconfig
-autocmd FileType typescript setlocal shiftwidth=4 tabstop=4
-autocmd FileType php setlocal shiftwidth=4 tabstop=4
-"=====================
+" ========================
+" AUTOCOMMANDS
+" ========================
 
-" OSM files as XML
-autocmd BufNewFile,BufRead *.osm set filetype=xml
-autocmd BufNewFile,BufRead *.osc set filetype=xml
-" GEOJSON files as JSON
-autocmd BufNewFile,BufRead *.geojson set filetype=json
-" Jenkinsfile is written in Groovy
-autocmd BufNewFile,BufRead Jenkinsfile set syntax=groovy
-" ==================
-
-let g:netrw_liststyle = 3
+augroup filetype_overrides
+  autocmd!
+  " still useful while not in develop's version of .editorconfig
+  autocmd FileType typescript setlocal shiftwidth=4 tabstop=4
+  autocmd FileType php setlocal shiftwidth=4 tabstop=4
+  " OSM files as XML
+  autocmd BufNewFile,BufRead *.osm set filetype=xml
+  autocmd BufNewFile,BufRead *.osc set filetype=xml
+  " GEOJSON files as JSON
+  autocmd BufNewFile,BufRead *.geojson set filetype=json
+  " Jenkinsfile is written in Groovy
+  autocmd BufNewFile,BufRead Jenkinsfile set syntax=groovy
+augroup end
